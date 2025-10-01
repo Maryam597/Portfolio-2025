@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const adminController = require('../controllers/adminController');
+const adminController = require('../controllers/admin.controller');
 
 router.get('/protected-route', adminController.verifyToken, (req, res) => {
   res.json({ message: 'Protected Route', userId: req.userId });
