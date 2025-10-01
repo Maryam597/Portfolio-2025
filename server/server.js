@@ -1,0 +1,39 @@
+require('dotenv').config();
+const express = require('express');   
+const cors = require('cors');
+const connectDB = require('./config/db');
+const bodyParser = require('body-parser');
+
+// Middlewares
+const app = express(); 
+app.use(express.json()); 
+app.use(bodyParser.json()); // analyse le corps des requêtes en format JSON
+
+// analyse le corps des requêtes avec le type de contenu
+app.use(bodyParser.urlencoded({ extended: true })); // urlencoded : pr laisser l'url tel qu'il est 
+app.use(
+    cors({
+        origin: 'http://localhost:3000', 
+        optionSuccessStatus: 200,
+    })
+);
+
+//Routes 
+// app.use('/', userRoutes);
+
+
+app.use(express.static('public'));
+
+const start = async () => {  
+    try {
+        await connectDB();
+        const port = process.env.PORT || 6000;  
+        app.listen(port, () => {
+            console.log(`Le serveur a démarré sur le port ${port}`);
+        })
+    } catch {
+        console.log(`Erreur lors du démarrage du serveur`);
+    }
+}; 
+
+start(); 
