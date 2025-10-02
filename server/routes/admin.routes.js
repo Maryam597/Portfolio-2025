@@ -1,13 +1,14 @@
 const router = require('express').Router();
 const adminController = require('../controllers/admin.controller');
 
-router.get('/protected-route', adminController.verifyToken, (req, res) => {
-  res.json({ message: 'Protected Route', adminId: req.adminId });
+router.get('/protected-route', checkTokenMiddleware, (req, res) => {
+  res.json({ message: 'Protected Route', adminId: req.decodedToken.adminId });
 });
 
-router.post('/register', adminController.createAdmin);  
+
+router.post('/register', adminController.createAdmin);
 // router.put('/me', adminController.updateAdmin);        
-router.get('/images', adminController.getHeader);     
+router.get('/images', adminController.getHeader);
 // router.post('/login', adminController.login);
 
 

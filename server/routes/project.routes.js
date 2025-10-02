@@ -1,12 +1,14 @@
 const router = require('express').Router();
 const projectController = require('../controllers/project.controller');
-const adminController = require('../controllers/admin.controller'); 
+const adminController = require('../controllers/admin.controller');
+const checkTokenMiddleware = require('../middlewares/checkTokenMiddleware');
+
 
 router.get('/', projectController.getAllProjects);
 router.get('/:id', projectController.getProjectById);
 
-router.post('/', adminController.verifyToken, projectController.createProject);
-router.put('/:id', adminController.verifyToken, projectController.updateProject);
-router.delete('/:id', adminController.verifyToken, projectController.deleteProject);
+router.post('/', checkTokenMiddleware, projectController.createProject);
+router.put('/:id', checkTokenMiddleware, projectController.updateProject);
+router.delete('/:id', checkTokenMiddleware, projectController.deleteProject);
 
 module.exports = router;
