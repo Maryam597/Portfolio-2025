@@ -1,0 +1,36 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  gap: 1.5rem; /* espace entre les liens */
+}
+
+nav a {
+  text-decoration: none;
+  /* color: #ffffff; */
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #61dafb; /* couleur au survol */
+}
+
+
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    top: 0;
+}
+
+li {
+    display: inline;
+    margin-right: 10px;
+}
