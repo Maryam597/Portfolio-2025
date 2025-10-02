@@ -4,6 +4,7 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const adminRoutes = require('./routes/admin.routes')
 const authRoutes = require('./routes/auth.routes')
+const projectRoutes = require('./routes/project.routes')
 const bodyParser = require('body-parser');
 
 // Middlewares
@@ -23,6 +24,7 @@ app.use(
 //Routes 
 app.use('/', adminRoutes);
 app.use('/auth', authRoutes)
+app.use('/projects', projectRoutes)
 
 
 app.use(express.static('public'));
