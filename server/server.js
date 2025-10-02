@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');   
 const cors = require('cors');
 const connectDB = require('./config/db');
+const adminRoutes = require('./routes/admin.routes')
+const authRoutes = require('./routes/auth.routes')
 const bodyParser = require('body-parser');
 
 // Middlewares
@@ -19,7 +21,8 @@ app.use(
 );
 
 //Routes 
-// app.use('/', userRoutes);
+app.use('/', adminRoutes);
+app.use('/auth', authRoutes)
 
 
 app.use(express.static('public'));

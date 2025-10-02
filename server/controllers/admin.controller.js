@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt');
 const mysql = require('mysql2');
-const jwt = require('jsonwebtoken');
-const auth = require('../services/auth.Service');
-const emailController = require('./email.controller');
+// const jwt = require('jsonwebtoken');
+const auth = require('../services/auth.service');
+// const emailController = require('./email.controller');
 const router = require('express').Router(); 
 
 const conn = mysql.createConnection({
@@ -35,8 +35,8 @@ function isStrongPassword(password) {
   return lengthCheck && lowercaseCheck && uppercaseCheck && digitCheck && specialCharCheck;
 }
 
-const createUser = async (req, res) => {
-  const { firstname, lastname, email, phone, address, zipcode, city, password } = req.body;
+const createAdmin = async (req, res) => {
+  const { firstname, lastname, email, password } = req.body;
 
   if (!isStrongPassword(password)) {
     let errorMessage = 'Le mot de passe doit contenir';
@@ -68,16 +68,16 @@ const createUser = async (req, res) => {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  if (!firstname || !lastname || !email || !phone || !address || !zipcode || !city || !password) {
+  if (!firstname || !lastname || !email || !password) {
     return res.status(400).json({
       error: 'Données manquantes ',
     });
   }
 
-  const emailCheckQuery = 'SELECT * FROM user WHERE email = ?';
+  const emailCheckQuery = 'SELECT * FROM admin WHERE email = ?';
   try {
-    const existingUser = await queryAsync(emailCheckQuery, [email]);
-    if (existingUser.length > 0) {
+    const existingadmin = await queryAsync(emailCheckQuery, [email]);
+    if (existingadmin.length > 0) {
 return res.status(400).json({ success: false, message: 'Email déjà utilisé' });
     }
   } catch (emailCheckError) {
@@ -85,18 +85,18 @@ return res.status(400).json({ success: false, message: 'Email déjà utilisé' }
     return res.status(500).json({ success: false, message: 'Erreur lors de la vérification de l\'email' });
   }
 
-  const query = 'INSERT INTO user (firstname, lastname, email, phone, address, zipcode, city, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+  const query = 'INSERT INTO admin (firstname, lastname, email, password) VALUES (?, ?, ?, ?)';
   try {
-    const result = await queryAsync(query, [firstname, lastname, email, phone, address, zipcode, city, hashedPassword]);
-    console.log('Result after user insertion:', result);
+    const result = await queryAsync(query, [firstname, lastname, email, hashedPassword]);
+    console.log('Result after admin insertion:', result);
 
     // Generate token
-    const userId = result.insertId;
-    const token = auth.generateAuthToken(userId);
+    const adminId = result.insertId;
+    const token = auth.generateAuthToken(adminId);
 
-    await emailController.sendWelcomeEmail({ name: `${firstname} ${lastname}`, email });
+    // await emailController.sendWelcomeEmail({ name: `${firstname} ${lastname}`, email });
 
-    res.status(200).json({ success: true, userId, token, message: 'Utilisateur enregistré' });
+    res.status(200).json({ success: true, adminId, token, message: 'Utilisateur enregistré' });
   } catch (err) {
     console.error('Erreur lors de l\'insertion d\'un utilisateur :' + err);
     res.status(500).json({ error: 'Erreur lors de l\'insertion des données' });
@@ -104,37 +104,7 @@ return res.status(400).json({ success: false, message: 'Email déjà utilisé' }
 };
 
 
-const updateUser = (req, res) => {
-    const { firstname, lastname, email, phone, address, zipcode, city } = req.body;
 
-    const query = 'UPDATE user SET `firstname` = ?, `lastname` = ?, `email` = ?, `phone` = ?, `address` = ?, `zipcode` = ?, `city` = ? WHERE ID = ?';
-
-    conn.query(query, [firstname, lastname, email, phone, address, zipcode, city, req.params.id], (err) => {
-        if (err) {
-            console.error('Erreur lors de la modification d\'un utilisateur :' + err);
-            res.status(500).json({ error: 'Erreur lors de la modification des données' });
-        } else {
-            console.log('Données de l\'utilisateur modifiées');
-            res.status(200).json({ message: 'Données de l\'utilisateur modifiées' });
-        }
-    });
-};
-
-
-
-const deleteUser = (req, res) => {
-    const query = `DELETE FROM user WHERE ID = ?`
-    
-    conn.query(query,[req.params.id], (err, result) => {
-        if(err) {
-            console.error('Erreur lors de la suppression des données :' + err);
-            res.status(500).json({ error: 'Erreur lors de la suppression des données' });
-        }
-        else {
-            res.status(200).json({ message: 'Utilisateur supprimé'});
-        }
-    })
-}; 
 
 
 const getHeader = (req, res) => {
@@ -163,21 +133,19 @@ const verifyToken = (req, res, next) => {
       if (err) {
         return res.status(401).json({ error: 'Unauthorized - Invalid token' });
       }
-      req.userId = decoded.userId;
+      req.adminId = decoded.adminId;
       next();
     });
   };
 
 
   router.get('/protected-route', verifyToken, (req, res) => {
-    res.json({ message: 'Protected Route', userId: req.userId });
+    res.json({ message: 'Protected Route', adminId: req.adminId });
   });
 
 
 module.exports = {
-    createUser,
-    updateUser, 
-    deleteUser,
+    createAdmin,
     getHeader,
     verifyToken,
 };
