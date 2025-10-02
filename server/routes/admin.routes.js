@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const adminController = require('../controllers/admin.controller');
+const checkTokenMiddleware = require('../middlewares/checkTokenMiddleware')
 
 router.get('/protected-route', checkTokenMiddleware, (req, res) => {
   res.json({ message: 'Protected Route', adminId: req.decodedToken.adminId });
