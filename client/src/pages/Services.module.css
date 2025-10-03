@@ -18,6 +18,15 @@
   gap: 1.5rem;
 }
 
+.service-card ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 0.5rem; 
+}
+
+
 .service-card {
   background-color: #fff;
   border: 1px solid #ddd;

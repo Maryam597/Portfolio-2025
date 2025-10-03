@@ -6,9 +6,10 @@
 }
 
 main {
-  padding-top: 80px; 
+  padding-top: 80px;
+  padding-bottom: 80px; 
   max-width: 1200px;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
 
