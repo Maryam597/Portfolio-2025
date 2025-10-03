@@ -4,7 +4,7 @@ const adminController = require('../controllers/admin.controller');
 const checkTokenMiddleware = require('../middlewares/checkTokenMiddleware');
 
 
-router.get('/', projectController.getAllProjects);
+router.get('/all', projectController.getAllProjects);
 router.get('/:id', projectController.getProjectById);
 
 router.post('/', checkTokenMiddleware, projectController.createProject);

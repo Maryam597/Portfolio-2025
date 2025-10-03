@@ -23,7 +23,7 @@
     border-radius: 7px;
     padding: 20px;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     color: white;
     font-size: 30px;
     margin-top: 30px;
@@ -174,7 +174,7 @@ border: solid 0px #0066cc;
     height: 100%;
     background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     backdrop-filter: blur(5px); /* Apply the blur effect */
   }
@@ -218,6 +218,26 @@ text-transform: uppercase;
     border: none;
     }
 
+.contact-intro {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-intro h1 {
+  font-size: 2rem;
+  color: #597ca4;
+  margin: 0;
+}
+
+.contact-intro p {
+  max-width: 500px;
+  margin: 0;
+  /* text-align: right;  */
+}
+
+
 @media screen and (max-width: 600px) {
      
     .contactheader {
@@ -228,7 +248,7 @@ text-transform: uppercase;
     max-width: 100%;
     width: 340px;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     flex-wrap: wrap;
 

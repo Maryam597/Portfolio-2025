@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styles from './Contact.module.css';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -51,7 +52,11 @@ const Contact = () => {
 
   return (
     <div>
-      <header className='contactheader'></header>
+      {/* <header className='contactheader'></header> */}
+            <div className={styles['contact-intro']}>
+                <h1>Nos projets</h1>
+                <p>Découvrez nos projets récents, mettant en avant notre expertise et notre créativité.</p>
+            </div>
 
       <div className='contact'>
         <div className='contact1'>

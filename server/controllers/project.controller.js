@@ -20,7 +20,7 @@ const createProject = async (req, res) => {
     const imagePath = `/projectpics/${image}`;
 
     const query = 'INSERT INTO projects (title, summary, description, image, technologies, link_demo, link_github, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-    conn.query(query, [title, summary, description, imagePath, technologies, link_demo, link_github, created_at], (err, result) => {
+    conn.query(query, [title, summary, description, imagePath, JSON.stringify(technologies), link_demo, link_github, created_at], (err, result) => {
         if (err) {
             console.error('Error registering a project:', err);
             res.status(500).json({ error: 'Error registering a project.' });
@@ -47,7 +47,7 @@ const updateProject = (req, res) => {
     const projectId = req.params.id;
     const { title, summary, description, image, technologies, link_demo, link_github, created_at } = req.body;
 
-    if (!title || !summary || !description || !image || !technologies || !link_demo || !link_github || !created_at) {
+    if (!title || !summary || !description || !image || !Array.isArray(technologies) || technologies.length === 0 || !link_demo || !link_github || !created_at) {
         return res.status(400).json({
             error: 'Missing data for project update.',
         });
@@ -56,7 +56,7 @@ const updateProject = (req, res) => {
     const imagePath = `/projectpics/${image}`;
 
     const query = 'UPDATE projects SET title = ?, summary = ?, description = ?, image = ?, technologies = ?, link_demo = ?, link_github = ?, created_at = ? WHERE ID = ?';
-    conn.query(query, [title, summary, description, imagePath, technologies, link_demo, link_github, created_at, projectId], (err) => {
+    conn.query(query, [title, summary, description, imagePath, JSON.stringify(technologies), link_demo, link_github, created_at, projectId], (err) => {
         if (err) {
             console.error('Error updating project:', err);
             res.status(500).json({ error: 'Error updating project.' });
