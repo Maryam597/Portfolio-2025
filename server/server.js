@@ -6,6 +6,7 @@ const adminRoutes = require('./routes/admin.routes');
 const authRoutes = require('./routes/auth.routes');
 const projectRoutes = require('./routes/project.routes');
 const emailRoutes = require('./routes/email.route');
+const serviceRoutes = require('./routes/services.route');
 const bodyParser = require('body-parser');
 
 // Middlewares
@@ -27,6 +28,7 @@ app.use('/', adminRoutes);
 app.use('/auth', authRoutes);
 app.use('/projects', projectRoutes);
 app.use('/email', emailRoutes);
+app.use('/services', serviceRoutes);
 
 
 app.use(express.static('public'));
