@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // urlencoded : pr laisser l
 app.use(
     cors({
         origin: 'http://localhost:5173', 
+        credentials: true,
         optionSuccessStatus: 200,
     })
 );
