@@ -1,0 +1,297 @@
+
+.contact {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+      }
+
+
+.contactheader {
+    background-image: url("/public/images/contactheader.png");
+    width: 100%;
+    height: 400px;
+    z-index: 10;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+}
+
+.contact1 {
+    width: 937px;
+    height: 138px;
+    background: #597CA4;
+    border-radius: 7px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    font-size: 30px;
+    margin-top: 30px;
+}
+  
+.answer {
+    display: flex; 
+    align-items: center;
+}
+
+.contactinfo {
+    width: 281px;
+  height: 356px;
+  background: #BEBEBE;
+  border-radius: 49px;
+}
+
+.fbcontact{
+    width: 486px;
+  height: 356px;
+  background: #BEBEBE;
+  border-radius: 49px;
+  margin-left: 60px;
+
+}
+
+.generalcontact {
+    display: flex;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.fblogo {
+    width: 342px;
+    text-align: center;
+    color: #597CA4;
+    font-size: 48px;
+    font-family: 'Changa', sans-serif;
+    font-weight: 400;
+    display: flex;
+    margin: 40px;
+}
+
+.fbtitle {
+    text-align: center;
+    padding: 30px;
+}
+
+h2 {
+    color: #3d4247;
+    margin: 50px;
+}
+
+
+.form1 {
+  width: 395px;
+  height: 57px;
+  background: #BEBEBE;
+  margin: 0px 0px 15px 0px;
+  display: flex;
+  border-radius: 0;
+  border: 0;
+    
+}
+
+#name {
+margin-right: 5px;
+}
+
+
+.line1 {
+    display: flex;
+    border: 0;
+}
+
+.line2 {
+    width: 792px;
+  height: 57px;
+  background: #BEBEBE;
+  border-radius: 0;
+  margin-bottom: 15px;
+  border: 0;
+
+
+}
+
+.line3 {
+    width: 792px;
+    height: 309px;
+    background: #BEBEBE;
+    border-radius: 0;
+    border: 0;
+
+}
+
+.form input::placeholder {
+    color: #597CA4;
+    text-align: left; 
+    padding: 15px;
+    font-family: 'Big Shoulders Text';
+    font-size: 20px;
+}
+
+
+.formBtn{
+
+font-family: Roboto, sans-serif;
+font-family: 'Big Shoulders Text', sans-serif;
+font-weight: 100;
+font-size: 25px;
+color: #fff;
+background-color: #597ca4;
+padding: 10px 30px;
+border: solid #597ca4 0px;
+box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+border-radius: 29px;
+transition : 1000ms;
+transform: translateY(0);
+display: flex;
+flex-direction: row;
+align-items: center;
+cursor: pointer;
+margin-top: 20px;
+
+}
+
+.formBtn:hover{
+
+transition : 1000ms;
+padding: 10px 50px;
+transform : translateY(-0px);
+background-color: #88add6;
+color: #edf5fc;
+border: solid 0px #0066cc;
+}
+
+.form {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px); /* Apply the blur effect */
+  }
+  
+  .modal {
+    background: white;
+    padding: 20px;
+    width: 500px;
+    font-size: 20px;
+    color:#153a5f;
+    font-weight: bolder;
+    height: 150px;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .ok {
+    margin-top: 15px;
+    font-family: Roboto, sans-serif;
+font-weight: 100;
+font-size: 25px;
+color: #597ca4;
+background-color: #bcbcbc;
+padding: 10px 60px;
+border: none;
+box-shadow: none;
+border-radius: 50px;
+transition : 1221ms;
+transform: translateY(0);
+cursor: pointer;
+text-transform: uppercase;
+  }
+
+  .ok:hover{
+
+    transition : 1221ms;
+    padding: 10px 50px;
+    transform : translateY(-0px);
+    background-color: #969393;
+    color: #0066cc;
+    border: none;
+    }
+
+@media screen and (max-width: 600px) {
+     
+    .contactheader {
+          height: 200px; 
+    }
+      
+    .contact1 {
+    max-width: 100%;
+    width: 340px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    }
+
+    .contact1 p {
+        font-size: 24px;
+    }
+
+    .generalcontact {
+        max-width: 100%;
+        display: flex;
+        
+    }
+
+    .contactinfo {
+        height: 330px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .fbcontact {
+        display: none;
+
+    }
+    
+      .form1,
+      .line2,
+      .line3 {
+        width: 100%; /* Full width for form elements */
+        margin: 0; /* Reset margin */
+      }
+    
+      .formBtn {
+        padding: 10px 30px; /* Adjust padding for smaller screens */
+      }
+    
+      h2 {
+        margin: 20px 0; /* Adjust margin for better spacing */
+      }
+
+      .fblogo {
+        width: 70px;
+        margin: 10px;
+
+      }
+
+      .responsive-div1 {
+        display: flex;
+        align-items: center;
+
+      }
+
+      .form1 {
+        margin: 10px;
+      }
+
+      .line3 {
+        margin: 10px;
+      }
+    .contactform {
+        display: flex;
+        flex-direction: column;
+    }
+    }

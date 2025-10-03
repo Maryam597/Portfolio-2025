@@ -2,9 +2,10 @@ require('dotenv').config();
 const express = require('express');   
 const cors = require('cors');
 const connectDB = require('./config/db');
-const adminRoutes = require('./routes/admin.routes')
-const authRoutes = require('./routes/auth.routes')
-const projectRoutes = require('./routes/project.routes')
+const adminRoutes = require('./routes/admin.routes');
+const authRoutes = require('./routes/auth.routes');
+const projectRoutes = require('./routes/project.routes');
+const emailRoutes = require('./routes/email.route');
 const bodyParser = require('body-parser');
 
 // Middlewares
@@ -16,15 +17,16 @@ app.use(bodyParser.json()); // analyse le corps des requêtes en format JSON
 app.use(bodyParser.urlencoded({ extended: true })); // urlencoded : pr laisser l'url tel qu'il est 
 app.use(
     cors({
-        origin: 'http://localhost:3000', 
+        origin: 'http://localhost:5173', 
         optionSuccessStatus: 200,
     })
 );
 
 //Routes 
 app.use('/', adminRoutes);
-app.use('/auth', authRoutes)
-app.use('/projects', projectRoutes)
+app.use('/auth', authRoutes);
+app.use('/projects', projectRoutes);
+app.use('/email', emailRoutes);
 
 
 app.use(express.static('public'));
