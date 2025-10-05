@@ -1,4 +1,3 @@
-// AdminDashboard.tsx
 import React, { useState } from "react";
 import axios from "axios";
 import styles from "./AdminDashboard.module.css";
@@ -6,7 +5,6 @@ import styles from "./AdminDashboard.module.css";
 const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState("services");
 
-    // State pour service
     const [serviceData, setServiceData] = useState({
         title: "",
         price: "",

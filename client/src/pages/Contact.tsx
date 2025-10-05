@@ -23,14 +23,7 @@ const Contact = () => {
     try {
       await axios.post('http://localhost:8000/email/send-email', formData);
       setIsEmailSent(true);
-
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-      });
-
+      setFormData({ name: '', email: '', subject: '', message: '' });
       console.log('Email sent successfully');
     } catch (error) {
       console.error('Error sending email:', error);
@@ -42,67 +35,64 @@ const Contact = () => {
   };
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 600);
-    };
-
+    const handleResize = () => setIsSmallScreen(window.innerWidth <= 600);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
     <div>
-      {/* <header className='contactheader'></header> */}
-            <div className={styles['contact-intro']}>
-                <h1>Nos projets</h1>
-                <p>Découvrez nos projets récents, mettant en avant notre expertise et notre créativité.</p>
-            </div>
+      {/* <header className={styles.contactheader}></header> */}
+      <div className={styles['contact-intro']}>
+        <h1>Nos projets</h1>
+        <p>Découvrez nos projets récents, mettant en avant notre expertise et notre créativité.</p>
+      </div>
 
-      <div className='contact'>
-        <div className='contact1'>
+      <div className={styles.contact}>
+        <div className={styles.contact1}>
           <div>
             <p> ☎️ Joignable par téléphone 7/7J de 9h à 21h</p>
           </div>
-          <div className='answer'>
+          <div className={styles.answer}>
             <p> Réponse rapide ! </p>
           </div>
         </div>
 
-        <div className='generalcontact'>
-          <div className='contactinfo'>
+        <div className={styles.generalcontact}>
+          <div className={styles.contactinfo}>
             <li>📞 07.50.47.46.23</li>
             <li>📧 maryam.dri@hotmail.fr</li>
-            <li> Villeneuve d’ascq</li>
+            <li>Villeneuve d’Ascq</li>
 
             {isSmallScreen && (
-              <div className='responsive-div1'>
+              <div className={styles['responsive-div1']}>
                 <p>DL Motors</p>
               </div>
             )}
           </div>
-
-
         </div>
 
-        <div className='form'>
+        <div className={styles.form}>
           <h2>Formulaire de contact</h2>
 
           {isEmailSent && (
-            <div className="modal-overlay">
-              <div className="modal">
-                <p>Votre message a été envoyé avec succès!</p>
-                <button onClick={handleReload} className='ok'>OK</button>
+            <div className={styles['modal-overlay']}>
+              <div className={styles.modal}>
+                <p>Votre message a été envoyé avec succès !</p>
+                <button onClick={handleReload} className={styles.ok}>
+                  OK
+                </button>
               </div>
             </div>
           )}
 
-          <form className='contactform' onSubmit={handleSubmit}>
-            <div className='line1'>
+          <form className={styles.contactform} onSubmit={handleSubmit}>
+            <div className={styles.line1}>
               <input
                 type='text'
                 name='name'
                 placeholder='Nom'
-                className='form1'
+                className={styles.form1}
                 id='name'
                 value={formData.name}
                 onChange={handleChange}
@@ -111,7 +101,7 @@ const Contact = () => {
                 type='email'
                 name='email'
                 placeholder='Adresse Email'
-                className='form1'
+                className={styles.form1}
                 id='email'
                 value={formData.email}
                 onChange={handleChange}
@@ -122,7 +112,7 @@ const Contact = () => {
               type='text'
               name='subject'
               placeholder='Sujet'
-              className='line2'
+              className={styles.line2}
               value={formData.subject}
               onChange={handleChange}
             />
@@ -130,12 +120,12 @@ const Contact = () => {
             <textarea
               name='message'
               placeholder='Message'
-              className='line3'
+              className={styles.line3}
               value={formData.message}
               onChange={handleChange}
             />
 
-            <button type='submit' className='formBtn'>
+            <button type='submit' className={styles.formBtn}>
               Envoyer
             </button>
           </form>
