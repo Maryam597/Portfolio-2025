@@ -1,4 +1,5 @@
 import './App.css'
+import background from './assets/background.jpg';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
@@ -12,18 +13,32 @@ import Footer from './components/Footer';
 function App() {
   return (
     <Router>
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        </Routes>
-      </main>
-      <Footer />
+      <div 
+        style={{
+          backgroundImage: `url(${background})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <Header />
+
+        <main style={{ flex: 1 }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          </Routes>
+        </main>
+
+        <Footer />
+      </div>
     </Router>
   );
 }
