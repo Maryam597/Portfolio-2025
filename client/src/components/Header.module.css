@@ -9,11 +9,12 @@
   display: flex;
   align-items: center; 
   justify-content: space-between; 
-  padding: 0 50px; 
+  padding: 0 35px; 
 margin-top: 30px;
+margin-left: 32px;
 
-background: #02012e;
-background: linear-gradient(90deg, rgba(2, 1, 46, 0) 0%, rgba(2, 1, 46, 0.78) 3%, rgba(0, 0, 171, 0.78) 40%, rgba(0, 0, 179, 0.78) 34%, rgba(42, 103, 173, 0) 45%);
+background: #000000;
+background: linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(71, 71, 71, 0.78) 34%, rgba(149, 149, 150, 0.78) 40%, rgba(247, 247, 247, 0) 45%);
 }
 
 nav {
@@ -34,7 +35,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #61dafb;
+  color: rgb(132, 155, 182);
 }
 
 ul {

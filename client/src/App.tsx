@@ -1,5 +1,5 @@
 import './App.css'
-import background from './assets/background.jpg';
+import background from './assets/marbre.jpg';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
@@ -15,7 +15,9 @@ function App() {
     <Router>
       <div 
         style={{
+          // backgroundImage: `url(${background})`,
           backgroundImage: `url(${background})`,
+
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
