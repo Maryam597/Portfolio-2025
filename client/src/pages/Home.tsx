@@ -7,12 +7,12 @@ const Home = () => {
       {/* Bandeau présentation */}
       <section className={styles.banner}>
         <div className={styles.presentation}>
-          <h1>Bienvenue sur mon portfolio 🚀</h1>
+          <h1>Développeuse Web Full-Stack </h1>
           <p>
-            Je suis développeuse junior spécialisée en <strong>React</strong>,{" "}
-            <strong>Node.js</strong> et <strong>MySQL</strong>. 
-            Passionnée par la tech et la création de projets modernes, 
-            j’aide à transformer vos idées en solutions concrètes. 
+            Je suis développeuse spécialisée en <strong>Front-end</strong>{" "}
+            et <strong>Back-end</strong>. 
+            Je vous accompagne dans la création de sites web et d'applications sur mesure, 
+            Je donne vie à vos idées. 
           </p>
         </div>
 

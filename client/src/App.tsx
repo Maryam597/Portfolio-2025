@@ -1,5 +1,5 @@
 import './App.css'
-import background from './assets/marbre.jpg';
+import background from './assets/IMG-20251031-WA0026.jpg';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
