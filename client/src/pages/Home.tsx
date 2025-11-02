@@ -17,7 +17,7 @@ const Home = () => {
           </p>
         </div>
 
-<div
+{/* <div
     className={styles.bannerImage}
     style={{
       backgroundImage: `url(${techPic})`,
@@ -27,8 +27,27 @@ const Home = () => {
       width: '50%',
       minHeight: '100vh',
     }}
-  ></div>
+  ></div> */}
+
+
+
       </section>
+
+
+
+        <div className={styles.cube}>
+
+      <div className={styles.cube_side}>1</div>
+      <div className={styles.cube_side}>2</div>
+      <div className={styles.cube_side}>3</div>
+      <div className={styles.cube_side}>4</div>
+      <div className={styles.cube_side}>5</div>
+      <div className={styles.cube_side}>6</div>
+
+
+    </div>
+
+
 
       <section className={styles.stacks}>
         <h2>Mes compétences</h2>
