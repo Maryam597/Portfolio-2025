@@ -37,12 +37,12 @@ const Home = () => {
 
         <div className={styles.cube}>
 
-      <div className={styles.cube_side}>1</div>
-      <div className={styles.cube_side}>2</div>
-      <div className={styles.cube_side}>3</div>
-      <div className={styles.cube_side}>4</div>
-      <div className={styles.cube_side}>5</div>
-      <div className={styles.cube_side}>6</div>
+      <div className={styles.cube_side}></div>
+      <div className={styles.cube_side}></div>
+      <div className={styles.cube_side}></div>
+      <div className={styles.cube_side}></div>
+      <div className={styles.cube_side}></div>
+      <div className={styles.cube_side}></div>
 
 
     </div>
