@@ -35,17 +35,46 @@ const Home = () => {
 
 
 
-        <div className={styles.cube}>
+  <div className={styles.cubeContainer}>
+  <div className={`${styles.cube} ${styles.frontend}`}>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+  </div>
 
-      <div className={styles.cube_side}></div>
-      <div className={styles.cube_side}></div>
-      <div className={styles.cube_side}></div>
-      <div className={styles.cube_side}></div>
-      <div className={styles.cube_side}></div>
-      <div className={styles.cube_side}></div>
+  <div className={`${styles.cube} ${styles.backend}`}>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+  </div>
+
+  <div className={`${styles.cube} ${styles.design}`}>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+  </div>
+
+  <div className={`${styles.cube} ${styles.seo}`}>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+    <div className={styles.cube_side}></div>
+  </div>
+</div>
 
 
-    </div>
+
 
 
 
