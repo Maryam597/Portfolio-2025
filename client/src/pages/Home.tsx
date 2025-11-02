@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
+import techPic from '../assets/tech.jpg';
+
 
 const Home = () => {
   return (
     <div className={styles.home}>
-      {/* Bandeau présentation */}
       <section className={styles.banner}>
         <div className={styles.presentation}>
           <h1>Développeuse Web Full-Stack </h1>
@@ -16,14 +17,19 @@ const Home = () => {
           </p>
         </div>
 
-        {/* Déco à droite */}
-        <div className={styles.decoration}>
-          {/* Tu peux mettre une image, une illustration, ou un composant animé */}
-          <img src="/images/deco.png" alt="Décoration" />
-        </div>
+<div
+    className={styles.bannerImage}
+    style={{
+      backgroundImage: `url(${techPic})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      width: '50%',
+      minHeight: '100vh',
+    }}
+  ></div>
       </section>
 
-      {/* Stacks */}
       <section className={styles.stacks}>
         <h2>Mes compétences</h2>
         <div className={styles.stackList}>
@@ -35,7 +41,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Cards vers les autres pages */}
       <section className={styles.cards}>
         <div className={styles.card}>
           <h3>💼 Services</h3>
