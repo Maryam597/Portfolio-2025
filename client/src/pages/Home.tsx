@@ -8,9 +8,9 @@ const Home = () => {
 
   const [showFrontendTech, setShowFrontendTech] = useState(false);
   const frontendTech = ["React", "HTML", "CSS / Tailwind", "JavaScript"];
-  const techColors = ["#61DBFB", "#E34F26", "#264DE4", "#F0DB4F"]; // couleurs tech
+  const techColors = ["#61DBFB", "#E34F26", "#264DE4", "#F0DB4F"]; 
   const techLogos = [
-    "/logos/react.png",     // remplace par le chemin de ton logo React
+    "/logos/react.png",    
     "/logos/html.png",
     "/logos/css.png",
     "/logos/javascript.png",
@@ -61,16 +61,16 @@ const Home = () => {
           <div className={styles.cube_side}></div>
 
           {showFrontendTech && (
-            <div className={styles.techBubblesContainer}>
+            <div className={styles.techBubblesWrapper}>
               {frontendTech.map((tech, index) => (
                 <div
                   key={index}
                   className={styles.techBubble}
-                  style={{
-                    top: `${50 + index * 120}px`, // plus d'espacement vertical
-                    left: index % 2 === 0 ? "-200px" : "250px", // plus éloigné du cube
-                    backgroundColor: techColors[index % techColors.length], // couleur différente
-                  }}
+                  // style={{
+                  //   top: `${50 + index * 120}px`, // plus d'espacement vertical
+                  //   left: index % 2 === 0 ? "-200px" : "250px", // plus éloigné du cube
+                  //   backgroundColor: techColors[index % techColors.length], // couleur différente
+                  // }}
                 >
                   <img src={techLogos[index]} alt={tech} className={styles.techLogo} />
                   <span>{tech}</span>
