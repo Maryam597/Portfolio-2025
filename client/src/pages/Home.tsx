@@ -2,19 +2,61 @@ import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
 import techPic from '../assets/tech.jpg';
 import { useState } from "react";
-
+import { SiReact, SiHtml5, SiCss3, SiJavascript, SiAngular, SiTailwindcss, SiSpringboot, SiPhp, SiNodedotjs, SiFigma, SiBootstrap, SiCanva, SiMysql, SiPostman, SiDocker, SiGit, SiVuedotjs, SiNextdotjs, SiTypescript, SiExpress, SiMongodb, SiAdobeillustrator, SiSketch } from "react-icons/si";
+import { DiJava } from "react-icons/di";
+import React from "react";
 
 const Home = () => {
 
   const [showFrontendTech, setShowFrontendTech] = useState(false);
-  const frontendTech = ["React", "HTML", "CSS / Tailwind", "JavaScript"];
-  const techColors = ["#61DBFB", "#E34F26", "#264DE4", "#F0DB4F"]; 
-  const techLogos = [
-    "/logos/react.png",    
-    "/logos/html.png",
-    "/logos/css.png",
-    "/logos/javascript.png",
+  const [showBackendTech, setShowBackendTech] = useState(false);
+  const [showDesignTech, setShowDesignTech] = useState(false);
+  const [showToolsTech, setShowToolsTech] = useState(false);
+
+  const frontendTech = [
+    { icon: <SiReact />, name: "React" },
+    { icon: <SiHtml5 />, name: "HTML5" },
+    { icon: <SiCss3 />, name: "CSS3" },
+    { icon: <SiJavascript />, name: "JavaScript" },
+    { icon: <SiAngular />, name: "Angular" },
+    { icon: <SiVuedotjs />, name: "Vue.js" },
+    { icon: <SiTypescript />, name: "TypeScript" },
+    { icon: <SiNextdotjs />, name: "Next.js" },
+    { icon: <SiTailwindcss />, name: "Tailwind" },
+
   ];
+
+
+
+  const backendTech = [
+    { icon: <SiSpringboot />, name: "Spring Boot" },
+    { icon: <SiPhp />, name: "PHP" },
+    { icon: <SiNodedotjs />, name: "Node.js" },
+    { icon: <DiJava />, name: "Java" },
+    { icon: <SiExpress />, name: "Express" },
+  ];
+
+  const designTech = [
+    { icon: <SiFigma />, name: "Figma" },
+    { icon: <SiBootstrap />, name: "Bootstrap" },
+    { icon: <SiCanva />, name: "Canva" },
+    { icon: <SiAdobeillustrator />, name: "Illustrator" },
+    { icon: <SiSketch />, name: "Sketch" },
+
+
+  ];
+
+  const toolsTech = [
+    { icon: <SiMysql />, name: "MySQL" },
+    { icon: <SiMongodb />, name: "MongoDB" },
+    { icon: <SiPostman />, name: "Postman" },
+    { icon: <SiDocker />, name: "Docker" }, 
+    { icon: <SiGit />, name: "Git" },
+
+  ];
+
+  const techColors = ["#61DBFB", "#E34F26", "#264DE4", "#F0DB4F"];
+
 
   return (
     <div className={styles.home}>
@@ -66,49 +108,104 @@ const Home = () => {
                 <div
                   key={index}
                   className={styles.techBubble}
-                  // style={{
-                  //   top: `${50 + index * 120}px`, // plus d'espacement vertical
-                  //   left: index % 2 === 0 ? "-200px" : "250px", // plus éloigné du cube
-                  //   backgroundColor: techColors[index % techColors.length], // couleur différente
-                  // }}
+                  title={tech.name}
                 >
-                  <img src={techLogos[index]} alt={tech} className={styles.techLogo} />
-                  <span>{tech}</span>
+                  {React.cloneElement(tech.icon, { color: techColors[index], size: '2rem' })}
+
+                  {/* {tech.icon} */}
                 </div>
               ))}
             </div>
           )}
+
         </div>
 
 
+          
 
-
-        <div className={`${styles.cube} ${styles.backend}`}>
+        <div className={`${styles.cube} ${styles.backend}`}
+        onMouseEnter={() => setShowBackendTech(true)}
+          onMouseLeave={() => setShowBackendTech(false)}>
           <div className={styles.cube_side}>Backend</div>
           <div className={styles.cube_side}></div>
           <div className={styles.cube_side}></div>
           <div className={styles.cube_side}></div>
           <div className={styles.cube_side}></div>
           <div className={styles.cube_side}></div>
+
+          {showBackendTech && (
+            <div className={styles.techBubblesWrapper}>
+              {backendTech.map((tech, index) => (
+                <div
+                  key={index}
+                  className={styles.techBubble}
+                  title={tech.name}
+                >
+                  {React.cloneElement(tech.icon, { color: techColors[index], size: '2rem' })}
+
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
-        <div className={`${styles.cube} ${styles.design}`}>
+        <div className={`${styles.cube} ${styles.design}`}
+          onMouseEnter={() => setShowDesignTech(true)}
+          onMouseLeave={() => setShowDesignTech(false)}>
           <div className={styles.cube_side}>Design</div>
           <div className={styles.cube_side}></div>
           <div className={styles.cube_side}></div>
           <div className={styles.cube_side}></div>
           <div className={styles.cube_side}></div>
           <div className={styles.cube_side}></div>
+
+                    {showDesignTech && (
+            <div className={styles.techBubblesWrapper}>
+              {designTech.map((tech, index) => (
+                <div
+                  key={index}
+                  className={styles.techBubble}
+                  title={tech.name}
+                >
+                  {React.cloneElement(tech.icon, { color: techColors[index], size: '2rem' })}
+
+                </div>
+              ))}
+            </div>
+          )}
+
         </div>
 
-        <div className={`${styles.cube} ${styles.seo}`}>
-          <div className={styles.cube_side}>SEO</div>
+
+
+
+
+
+        <div className={`${styles.cube} ${styles.tools}`}
+                  onMouseEnter={() => setShowToolsTech(true)}
+          onMouseLeave={() => setShowToolsTech(false)}>
+          <div className={styles.cube_side}>Outils</div>
           <div className={styles.cube_side}></div>
           <div className={styles.cube_side}></div>
           <div className={styles.cube_side}></div>
           <div className={styles.cube_side}></div>
           <div className={styles.cube_side}></div>
+        {showToolsTech && (
+            <div className={styles.techBubblesWrapper}>
+              {toolsTech.map((tech, index) => (
+                <div
+                  key={index}
+                  className={styles.techBubble}
+                  title={tech.name}
+                >
+                  {React.cloneElement(tech.icon, { color: techColors[index], size: '2rem' })}
+
+                </div>
+              ))}
+            </div>
+          )}
         </div>
+
       </div>
 
 
@@ -116,7 +213,7 @@ const Home = () => {
 
 
 
-      <section className={styles.stacks}>
+      {/* <section className={styles.stacks}>
         <h2>Mes compétences</h2>
         <div className={styles.stackList}>
           <span>⚛️ React</span>
@@ -125,7 +222,7 @@ const Home = () => {
           <span>🎨 CSS / Tailwind</span>
           <span>🌐 SEO</span>
         </div>
-      </section>
+      </section> */}
 
       <section className={styles.cards}>
         <div className={styles.card}>
