@@ -132,16 +132,14 @@
 
 .cubeContainer {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-around;
+  align-items: flex-start;
   flex-wrap: wrap;
-  gap: 60px;
-  margin-top: 100px 0;
-  animation: float 5s ease-in-out infinite;
+  width: 100%;
+  margin-top: 50px;
   position: relative;
-
 }
+
 
 @keyframes float {
   0%, 100% {
@@ -167,7 +165,7 @@
   width: var(--width);
   position: relative;
   margin: 0;
-  transform: rotateX(24deg) rotateY(32deg);
+  transform: rotateX(24deg) rotateY(-45deg);
   transform-style: preserve-3d;
 
 }
@@ -273,14 +271,16 @@
 
 .techBubblesContainer {
   display: flex;
-  gap: 20px;
+  justify-content: center;
+  /* gap: 25px; */
   position: absolute;
-  left: 120%;
-  top: 50%;
-  transform: translateY(-50%);
+  /* top: 120%; sous le cube */
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.techBubble {
+
+/* .techBubble {
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -290,7 +290,34 @@
   justify-content: center;
   font-size: 30px;
   animation: fadeInRotate 0.5s ease forwards;
+} */
+
+.techBubble {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  font-size: 30px;
+  color: white;
+    background-color: #f0f0f0;
+
+  animation: fadeInRotate 0.5s ease forwards;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
 
 @keyframes fadeInRotate {
   0% {
@@ -324,12 +351,19 @@
 
 .techBubblesWrapper {
   display: flex;
-  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 15px;
   position: absolute;
-  top: 50%;
-  left: 120px;
-  transform: translateY(-50%);
+  top: 120%; /* juste sous le cube */
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  z-index: 5;
 }
+
+
 
 .techBubble svg {
   /* color: red; */
