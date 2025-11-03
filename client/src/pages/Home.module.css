@@ -137,25 +137,22 @@
   flex-wrap: wrap;
   gap: 60px;
   margin-top: 100px;
-  animation: jiggle 2s infinite ease-in-out;
+  animation: float 5s ease-in-out infinite;
 
 }
 
-@keyframes jiggle {
-  0% {
-    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg);
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1) rotateX(0deg) rotateY(0deg);
   }
   25% {
-    transform: translate3d(2px, -2px, 2px) rotateX(5deg) rotateY(5deg);
+    transform: translateY(-4px) scale(1.02) rotateX(1deg) rotateY(-1deg);
   }
   50% {
-    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg);
+    transform: translateY(0) scale(1) rotateX(0deg) rotateY(0deg);
   }
   75% {
-    transform: translate3d(-2px, 2px, -2px) rotateX(-5deg) rotateY(-5deg);
-  }
-  100% {
-    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg);
+    transform: translateY(3px) scale(0.99) rotateX(-1deg) rotateY(1deg);
   }
 }
 
@@ -242,4 +239,72 @@
 
 .cube.seo .cube_side {
   background: linear-gradient(135deg, #bd10e0, #5a005a);
+}
+
+
+
+.techList {
+  position: absolute;
+  top: 100%; /* en dessous du cube */
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  color: #153a5f;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  list-style: none;
+  z-index: 10;
+}
+
+.techList li {
+  margin: 0.3rem 0;
+}
+
+
+.techBubble:hover {
+  transform: scale(1.1);
+}
+
+
+
+.techBubblesContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh; /* couvre tout l'écran */
+  pointer-events: none;
+}
+
+.techBubble {
+  position: absolute;
+  width: 100px; /* plus grandes */
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  padding: 10px;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  pointer-events: auto;
+}
+
+.cube:hover .techBubble {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.techLogo {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 5px;
 }
