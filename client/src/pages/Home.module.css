@@ -79,14 +79,12 @@
   transform: translateY(-3px);
 }
 
-/* ===== CARDS ===== */
 .cards {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  margin-top: 50px;
+  margin-top: 200px;
   flex-wrap: wrap;
-
 }
 
 .card {
@@ -136,7 +134,8 @@
   align-items: flex-start;
   flex-wrap: wrap;
   width: 100%;
-  margin-top: 50px;
+  margin: 100px;
+
   position: relative;
 }
 
@@ -349,18 +348,21 @@
 }
 
 
+.cubeWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .techBubblesWrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 15px;
+  gap: 20px;
   position: absolute;
-  top: 120%; /* juste sous le cube */
-  left: 50%;
-  transform: translateX(-50%);
-  width: max-content;
-  z-index: 5;
+  top: 120%;
+  transform: none !important;
+  z-index: 10;
 }
 
 
