@@ -218,7 +218,7 @@ const Home = () => {
         </div>
       </div>
 
-      <section className={styles.cards}>
+      {/* <section className={styles.cards}>
         <div className={styles.card}>
           <h3>💼 Services</h3>
           <p>Découvrez ce que je propose</p>
@@ -235,7 +235,7 @@ const Home = () => {
           <p>Discutons de votre projet</p>
           <Link to="/contact">Me contacter</Link>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };
