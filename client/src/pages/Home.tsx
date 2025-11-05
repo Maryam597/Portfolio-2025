@@ -24,64 +24,77 @@ import {
   SiExpress,
   SiMongodb,
   SiAdobeillustrator,
-  SiSketch
+  SiSketch,
 } from "react-icons/si";
 import { DiJava } from "react-icons/di";
 import React from "react";
 
-const Home = () => {
-  const [showFrontendTech, setShowFrontendTech] = useState(false);
-  const [frontendClicked, setFrontendClicked] = useState(false);
+type CubeName = "frontend" | "backend" | "design" | "tools";
 
-  const [showBackendTech, setShowBackendTech] = useState(false);
-  const [backendClicked, setBackendClicked] = useState(false);
+const Home: React.FC = () => {
+  const [activeCube, setActiveCube] = useState<CubeName | null>(null);
+  const [hoverCube, setHoverCube] = useState<CubeName | null>(null);
 
-  const [showDesignTech, setShowDesignTech] = useState(false);
-  const [designClicked, setDesignClicked] = useState(false);
-
-  const [showToolsTech, setShowToolsTech] = useState(false);
-  const [toolsClicked, setToolsClicked] = useState(false);
+  const handleCubeClick = (cube: CubeName) => {
+    setActiveCube((prev) => (prev === cube ? null : cube));
+  };
 
   const frontendTech = [
-    { icon: <SiReact />, name: "React" },
-    { icon: <SiHtml5 />, name: "HTML5" },
-    { icon: <SiCss3 />, name: "CSS3" },
-    { icon: <SiJavascript />, name: "JavaScript" },
-    { icon: <SiAngular />, name: "Angular" },
-    { icon: <SiVuedotjs />, name: "Vue.js" },
-    { icon: <SiTypescript />, name: "TypeScript" },
-    { icon: <SiNextdotjs />, name: "Next.js" },
-    { icon: <SiTailwindcss />, name: "Tailwind" },
+    { icon: <SiReact />, name: "React", color: "#61DBFB" },
+    { icon: <SiHtml5 />, name: "HTML5", color: "#E34F26" },
+    { icon: <SiCss3 />, name: "CSS3", color: "#264DE4" },
+    { icon: <SiJavascript />, name: "JavaScript", color: "#F0DB4F" },
+    { icon: <SiAngular />, name: "Angular", color: "#DD0031" },
+    { icon: <SiVuedotjs />, name: "Vue.js", color: "#41B883" },
+    { icon: <SiTypescript />, name: "TypeScript", color: "#3178C6" },
+    { icon: <SiNextdotjs />, name: "Next.js", color: "#000000" },
+    { icon: <SiTailwindcss />, name: "Tailwind", color: "#38BDF8" },
   ];
 
   const backendTech = [
-    { icon: <SiSpringboot />, name: "Spring Boot" },
-    { icon: <SiPhp />, name: "PHP" },
-    { icon: <SiNodedotjs />, name: "Node.js" },
-    { icon: <DiJava />, name: "Java" },
-    { icon: <SiExpress />, name: "Express" },
+    { icon: <SiSpringboot />, name: "Spring Boot", color: "#6DB33F" },
+    { icon: <SiPhp />, name: "PHP", color: "#777BB4" },
+    { icon: <SiNodedotjs />, name: "Node.js", color: "#68A063" },
+    { icon: <DiJava />, name: "Java", color: "#E76F00" },
+    { icon: <SiExpress />, name: "Express", color: "#828282" },
   ];
 
   const designTech = [
-    { icon: <SiFigma />, name: "Figma" },
-    { icon: <SiBootstrap />, name: "Bootstrap" },
-    { icon: <SiCanva />, name: "Canva" },
-    { icon: <SiAdobeillustrator />, name: "Illustrator" },
-    { icon: <SiSketch />, name: "Sketch" },
+    { icon: <SiFigma />, name: "Figma", color: "#F24E1E" },
+    { icon: <SiBootstrap />, name: "Bootstrap", color: "#7952B3" },
+    { icon: <SiCanva />, name: "Canva", color: "#00C4CC" },
+    { icon: <SiAdobeillustrator />, name: "Illustrator", color: "#FF9A00" },
+    { icon: <SiSketch />, name: "Sketch", color: "#F7B500" },
   ];
 
   const toolsTech = [
-    { icon: <SiMysql />, name: "MySQL" },
-    { icon: <SiMongodb />, name: "MongoDB" },
-    { icon: <SiPostman />, name: "Postman" },
-    { icon: <SiDocker />, name: "Docker" },
-    { icon: <SiGit />, name: "Git" },
+    { icon: <SiMysql />, name: "MySQL", color: "#4479A1" },
+    { icon: <SiMongodb />, name: "MongoDB", color: "#47A248" },
+    { icon: <SiPostman />, name: "Postman", color: "#FF6C37" },
+    { icon: <SiDocker />, name: "Docker", color: "#2496ED" },
+    { icon: <SiGit />, name: "Git", color: "#F1502F" },
   ];
 
-  const techColors = [
-    "#61DBFB", "#E34F26", "#264DE4", "#F0DB4F",
-    "#DD0031", "#41B883", "#3178C6", "#000000", "#38BDF8"
-  ];
+  const renderTechBubbles = (cube: CubeName, techList: any[]) => {
+    const wrapperClass =
+      activeCube === cube
+        ? styles.techBubblesBottom
+        : hoverCube === cube && !activeCube
+        ? styles.techBubblesTop
+        : "";
+
+    if (!wrapperClass) return null;
+
+    return (
+      <div className={wrapperClass}>
+        {techList.map((tech, index) => (
+          <div key={index} className={styles.techBubble} title={tech.name}>
+            {React.cloneElement(tech.icon, { color: tech.color, size: "2rem" })}
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className={styles.home}>
@@ -89,9 +102,9 @@ const Home = () => {
         <div className={styles.presentation}>
           <h1>Développeuse Web Full-Stack</h1>
           <p>
-            Je suis développeuse spécialisée en <strong>Front-end</strong> et <strong>Back-end</strong>.
-            Je vous accompagne dans la création de sites web et d'applications sur mesure,
-            et je donne vie à vos idées.
+            Je suis développeuse spécialisée en <strong>Front-end</strong> et{" "}
+            <strong>Back-end</strong>. Je vous accompagne dans la création de
+            sites web et d'applications sur mesure, et je donne vie à vos idées.
           </p>
         </div>
       </section>
@@ -101,12 +114,11 @@ const Home = () => {
         <div className={styles.cubeWrapper}>
           <div
             className={`${styles.cube} ${styles.frontend}`}
-            onMouseEnter={() => setShowFrontendTech(true)}
-            onMouseLeave={() => !frontendClicked && setShowFrontendTech(false)}
-            onClick={() => {
-              setFrontendClicked(!frontendClicked);
-              setShowFrontendTech(true);
-            }}
+            onMouseEnter={() => setHoverCube("frontend")}
+            onMouseLeave={() =>
+              setHoverCube((prev) => (prev === "frontend" ? null : prev))
+            }
+            onClick={() => handleCubeClick("frontend")}
           >
             <div className={styles.cube_side}>FrontEnd</div>
             <div className={styles.cube_side}></div>
@@ -115,28 +127,18 @@ const Home = () => {
             <div className={styles.cube_side}></div>
             <div className={styles.cube_side}></div>
           </div>
-
-          {(showFrontendTech || frontendClicked) && (
-            <div className={styles.techBubblesWrapper}>
-              {frontendTech.map((tech, index) => (
-                <div key={index} className={styles.techBubble} title={tech.name}>
-                  {React.cloneElement(tech.icon, { color: techColors[index], size: "2rem" })}
-                </div>
-              ))}
-            </div>
-          )}
+          {renderTechBubbles("frontend", frontendTech)}
         </div>
 
         {/* BACKEND */}
         <div className={styles.cubeWrapper}>
           <div
             className={`${styles.cube} ${styles.backend}`}
-            onMouseEnter={() => setShowBackendTech(true)}
-            onMouseLeave={() => !backendClicked && setShowBackendTech(false)}
-            onClick={() => {
-              setBackendClicked(!backendClicked);
-              setShowBackendTech(true);
-            }}
+            onMouseEnter={() => setHoverCube("backend")}
+            onMouseLeave={() =>
+              setHoverCube((prev) => (prev === "backend" ? null : prev))
+            }
+            onClick={() => handleCubeClick("backend")}
           >
             <div className={styles.cube_side}>Backend</div>
             <div className={styles.cube_side}></div>
@@ -145,28 +147,18 @@ const Home = () => {
             <div className={styles.cube_side}></div>
             <div className={styles.cube_side}></div>
           </div>
-
-          {(showBackendTech || backendClicked) && (
-            <div className={styles.techBubblesWrapper}>
-              {backendTech.map((tech, index) => (
-                <div key={index} className={styles.techBubble} title={tech.name}>
-                  {React.cloneElement(tech.icon, { color: techColors[index], size: "2rem" })}
-                </div>
-              ))}
-            </div>
-          )}
+          {renderTechBubbles("backend", backendTech)}
         </div>
 
         {/* DESIGN */}
         <div className={styles.cubeWrapper}>
           <div
             className={`${styles.cube} ${styles.design}`}
-            onMouseEnter={() => setShowDesignTech(true)}
-            onMouseLeave={() => !designClicked && setShowDesignTech(false)}
-            onClick={() => {
-              setDesignClicked(!designClicked);
-              setShowDesignTech(true);
-            }}
+            onMouseEnter={() => setHoverCube("design")}
+            onMouseLeave={() =>
+              setHoverCube((prev) => (prev === "design" ? null : prev))
+            }
+            onClick={() => handleCubeClick("design")}
           >
             <div className={styles.cube_side}>Design</div>
             <div className={styles.cube_side}></div>
@@ -175,28 +167,18 @@ const Home = () => {
             <div className={styles.cube_side}></div>
             <div className={styles.cube_side}></div>
           </div>
-
-          {(showDesignTech || designClicked) && (
-            <div className={styles.techBubblesWrapper}>
-              {designTech.map((tech, index) => (
-                <div key={index} className={styles.techBubble} title={tech.name}>
-                  {React.cloneElement(tech.icon, { color: techColors[index], size: "2rem" })}
-                </div>
-              ))}
-            </div>
-          )}
+          {renderTechBubbles("design", designTech)}
         </div>
 
         {/* OUTILS */}
         <div className={styles.cubeWrapper}>
           <div
             className={`${styles.cube} ${styles.tools}`}
-            onMouseEnter={() => setShowToolsTech(true)}
-            onMouseLeave={() => !toolsClicked && setShowToolsTech(false)}
-            onClick={() => {
-              setToolsClicked(!toolsClicked);
-              setShowToolsTech(true);
-            }}
+            onMouseEnter={() => setHoverCube("tools")}
+            onMouseLeave={() =>
+              setHoverCube((prev) => (prev === "tools" ? null : prev))
+            }
+            onClick={() => handleCubeClick("tools")}
           >
             <div className={styles.cube_side}>Outils</div>
             <div className={styles.cube_side}></div>
@@ -205,19 +187,11 @@ const Home = () => {
             <div className={styles.cube_side}></div>
             <div className={styles.cube_side}></div>
           </div>
-
-          {(showToolsTech || toolsClicked) && (
-            <div className={styles.techBubblesWrapper}>
-              {toolsTech.map((tech, index) => (
-                <div key={index} className={styles.techBubble} title={tech.name}>
-                  {React.cloneElement(tech.icon, { color: techColors[index], size: "2rem" })}
-                </div>
-              ))}
-            </div>
-          )}
+          {renderTechBubbles("tools", toolsTech)}
         </div>
       </div>
 
+      {/* ===== CARDS ===== */}
       <section className={styles.cards}>
         <div className={styles.card}>
           <h3>💼 Services</h3>
@@ -227,7 +201,6 @@ const Home = () => {
         <div className={styles.card}>
           <h3>📂 Projets</h3>
           <p>Un aperçu de mes réalisations</p>
-
           <Link to="/projects">Voir plus</Link>
         </div>
         <div className={styles.card}>

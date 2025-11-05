@@ -365,6 +365,25 @@
   z-index: 10;
 }
 
+.techBubblesBottom {
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.techBubblesTop {
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+
 
 
 .techBubble svg {
