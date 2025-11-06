@@ -13,9 +13,10 @@
 margin-top: 30px;
 margin-left: 32px;
 
-
+/* 
 background: #000000;
-background: linear-gradient(90deg, rgba(41, 41, 41, 0.9) 0%, rgba(75, 74, 74, 0.91) 37%, rgba(87, 87, 87, 0) 37%);}
+background: linear-gradient(90deg, rgba(41, 41, 41, 0.9) 0%, rgba(75, 74, 74, 0.91) 37%, rgba(87, 87, 87, 0) 37%); */
+}
 
 nav {
   display: flex;

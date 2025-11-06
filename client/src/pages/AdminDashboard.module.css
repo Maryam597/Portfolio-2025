@@ -1,67 +1,208 @@
 .dashboard {
-  /* max-width: 800px; */
   margin: 50px auto;
-  padding: 20px;
-  background: #f5f7fa;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  font-family: Arial, sans-serif;
+  padding: 30px;
+  background: #f8fafc;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  font-family: 'Inter', Arial, sans-serif;
+  max-width: 900px;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  color: #334155;
+  font-size: 28px;
 }
 
 .tabs {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 25px;
 }
 
 .tabs button {
   flex: 1;
-  padding: 10px;
+  padding: 12px;
   border: none;
-  background: #dfe6ee;
+  background: #e2e8f0;
   cursor: pointer;
   font-size: 16px;
-  transition: 0.3s;
+  font-weight: 500;
+  color: #334155;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 .tabs button:hover {
-  background: #c5d3e3;
+  background: #cbd5e1;
 }
 
 .tabs .active {
-  background: #597ca4;
+  background: linear-gradient(135deg, #4a7ac8, #355c96);
   color: white;
   font-weight: bold;
+  box-shadow: 0 3px 8px rgba(74, 122, 200, 0.3);
 }
 
 .tabContent {
-  padding: 20px;
+  padding: 25px;
   background: white;
-  border-radius: 8px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
+}
+
+.form h2 {
+  color: #1e293b;
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .form input,
 .form textarea {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #1e293b;
+  background: #f9fafb;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.form input:focus,
+.form textarea:focus {
+  border-color: #4a7ac8;
+  background: #ffffff;
+  outline: none;
 }
 
 .form button {
+  padding: 12px;
+  background: linear-gradient(135deg, #4a7ac8, #355c96);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.form button:hover {
+  background: linear-gradient(135deg, #5b8fe4, #406aa6);
+  transform: translateY(-1px);
+}
+
+
+/* === Liste des services === */
+.serviceList {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.serviceCard {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.serviceCard:hover {
+  background: #f1f5f9;
+  transform: translateY(-3px);
+}
+
+.serviceCard h3 {
+  color: #1e293b;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.serviceCard p {
+  color: #475569;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.serviceFeatures {
+  margin-top: 8px;
+  padding-left: 15px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.serviceActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* === Boutons Modifier / Supprimer === */
+.serviceActions button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.serviceActions .editBtn {
+  background: #3b82f6;
+  color: white;
+}
+
+.serviceActions .editBtn:hover {
+  background: #2563eb;
+}
+
+.serviceActions .deleteBtn {
+  background: #ef4444;
+  color: white;
+}
+
+.serviceActions .deleteBtn:hover {
+  background: #dc2626;
+}
+
+/* === Formulaire d’édition === */
+.editForm {
+  margin-top: 15px;
+  padding: 15px;
+  background: #f1f5f9;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.editForm input,
+.editForm textarea {
   padding: 10px;
-  background: #597ca4;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.editForm button {
+  align-self: flex-end;
+  padding: 8px 16px;
+  background: #4a7ac8;
   color: white;
   border: none;
   border-radius: 6px;
@@ -69,6 +210,6 @@ h1 {
   transition: 0.3s;
 }
 
-.form button:hover {
-  background: #48678c;
+.editForm button:hover {
+  background: #355c96;
 }
