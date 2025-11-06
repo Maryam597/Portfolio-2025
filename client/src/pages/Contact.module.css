@@ -3,14 +3,14 @@
   background-color: #121212;
   color: #e0e0e0;
   min-height: 100vh;
-  padding: 2rem;
+  padding: 100px 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3rem;
   font-family: 'Arial', sans-serif;
-  padding: 100px;
   border-radius: 50px;
+
 }
 
 .contactHeader {
@@ -27,6 +27,14 @@
 .contactHeader p {
   font-size: 1.2rem;
   color: #ccc;
+}
+
+.contactInfoContainer {
+  display: flex;
+  gap: 3rem;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
 }
 
 .contactInfo {
@@ -76,7 +84,7 @@
   width: 100%;
   max-width: 800px;
   background-color: #1e1e1e;
-  padding: 2rem;
+  padding: 3rem;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
@@ -91,6 +99,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: 100%;;
 }
 
 .formRow {
@@ -99,15 +108,21 @@
   flex-wrap: wrap;
 }
 
+.formRow input {
+  flex: 1; /* tous les inputs prennent la même largeur */
+}
+
 .contactForm input,
 .contactForm textarea {
   width: 100%;
-  padding: 0.8rem 1rem;
-  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
   border: none;
   background-color: #2a2a2a;
   color: #fff;
   font-size: 1rem;
+  font-family: 'Arial', sans-serif;
+  transition: background 0.3s, outline 0.3s;
 }
 
 .contactForm input:focus,
@@ -118,7 +133,7 @@
 
 .contactForm textarea {
   resize: none;
-  min-height: 120px;
+  min-height: 140px;
 }
 
 .submitBtn {
@@ -127,7 +142,7 @@
   color: #121212;
   border: none;
   border-radius: 25px;
-  padding: 0.8rem 2rem;
+  padding: 0.9rem 2.5rem;
   font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
@@ -168,13 +183,4 @@
   color: #121212;
   font-weight: bold;
   cursor: pointer;
-}
-
-
-.contactInfoContainer {
-  display: flex;
-  gap: 3rem;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
 }
