@@ -101,115 +101,127 @@ h1 {
   transform: translateY(-1px);
 }
 
-
-/* === Liste des services === */
 .serviceList {
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-top: 15px;
 }
 
 .serviceCard {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: #fff;
+  border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 20px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-.serviceCard:hover {
-  background: #f1f5f9;
-  transform: translateY(-3px);
-}
-
-.serviceCard h3 {
-  color: #1e293b;
-  font-size: 18px;
-  margin-bottom: 8px;
-}
-
-.serviceCard p {
-  color: #475569;
-  font-size: 14px;
-  margin-bottom: 8px;
-}
-
-.serviceFeatures {
-  margin-top: 8px;
-  padding-left: 15px;
-  color: #64748b;
-  font-size: 13px;
-}
-
-.serviceActions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-/* === Boutons Modifier / Supprimer === */
-.serviceActions button {
-  padding: 8px 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 14px;
-  transition: all 0.2s ease;
-}
-
-.serviceActions .editBtn {
-  background: #3b82f6;
-  color: white;
-}
-
-.serviceActions .editBtn:hover {
-  background: #2563eb;
-}
-
-.serviceActions .deleteBtn {
-  background: #ef4444;
-  color: white;
-}
-
-.serviceActions .deleteBtn:hover {
-  background: #dc2626;
-}
-
-/* === Formulaire d’édition === */
-.editForm {
-  margin-top: 15px;
   padding: 15px;
-  background: #f1f5f9;
-  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.serviceCard h4 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.serviceCard .price {
+  color: #597ca4;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.serviceCard .desc {
+  color: #555;
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.actions {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
-.editForm input,
-.editForm textarea {
-  padding: 10px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  font-size: 14px;
-  background: #fff;
-}
-
-.editForm button {
-  align-self: flex-end;
-  padding: 8px 16px;
-  background: #4a7ac8;
-  color: white;
+.editBtn,
+.deleteBtn {
+  padding: 8px 12px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 14px;
   transition: 0.3s;
 }
 
-.editForm button:hover {
-  background: #355c96;
+.editBtn {
+  background: #597ca4;
+  color: white;
+}
+
+.deleteBtn {
+  background: #e57373;
+  color: white;
+}
+
+.editBtn:hover {
+  background: #48678c;
+}
+
+.deleteBtn:hover {
+  background: #d9534f;
+}
+
+/* Modale */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.25s ease;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.saveBtn {
+  background: #597ca4;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.cancelBtn {
+  background: #bbb;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

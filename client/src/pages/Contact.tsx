@@ -19,20 +19,16 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     try {
       await axios.post('http://localhost:8000/email/send-email', formData);
       setIsEmailSent(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
-      console.log('Email sent successfully');
     } catch (error) {
       console.error('Error sending email:', error);
     }
   };
 
-  const handleReload = () => {
-    window.location.reload();
-  };
+  const handleReload = () => window.location.reload();
 
   useEffect(() => {
     const handleResize = () => setIsSmallScreen(window.innerWidth <= 600);
@@ -41,96 +37,71 @@ const Contact = () => {
   }, []);
 
   return (
-    <div>
-      {/* <header className={styles.contactheader}></header> */}
-      <div className={styles['contact-intro']}>
-        <h1>Nos projets</h1>
-        <p>Découvrez nos projets récents, mettant en avant notre expertise et notre créativité.</p>
-      </div>
+    <div className={styles.contactPage}>
+      <header className={styles.contactHeader}>
+        <h1>Nous contacter</h1>
+        <p>Pour toute question ou projet, notre équipe est disponible pour vous répondre rapidement.</p>
+      </header>
 
-      <div className={styles.contact}>
-        <div className={styles.contact1}>
-          <div>
-            <p> ☎️ Joignable par téléphone 7/7J de 9h à 21h</p>
-          </div>
-          <div className={styles.answer}>
-            <p> Réponse rapide ! </p>
-          </div>
-        </div>
+      <section className={styles.contactInfo}>
+        {/* <div className={styles.infoCard}>
+          <p>☎️ Joignable par téléphone 7/7J de 9h à 21h</p>
+          <p className={styles.fastAnswer}>Réponse rapide !</p>
+        </div> */}
 
-        <div className={styles.generalcontact}>
-          <div className={styles.contactinfo}>
-            <li>📞 07.50.47.46.23</li>
-            <li>📧 maryam.dri@hotmail.fr</li>
-            <li>Villeneuve d’Ascq</li>
+        <ul className={styles.generalContact}>
+          <li>📞 07.50.47.46.23</li>
+          <li>📧 maryam.dri@hotmail.fr</li>
+          <li>📍 Villeneuve d’Ascq</li>
+          {isSmallScreen && <li>DL Motors</li>}
+        </ul>
+      </section>
 
-            {isSmallScreen && (
-              <div className={styles['responsive-div1']}>
-                <p>DL Motors</p>
-              </div>
-            )}
-          </div>
-        </div>
+      <section className={styles.contactFormSection}>
+        <h2>Formulaire de contact</h2>
 
-        <div className={styles.form}>
-          <h2>Formulaire de contact</h2>
-
-          {isEmailSent && (
-            <div className={styles['modal-overlay']}>
-              <div className={styles.modal}>
-                <p>Votre message a été envoyé avec succès !</p>
-                <button onClick={handleReload} className={styles.ok}>
-                  OK
-                </button>
-              </div>
+        {isEmailSent && (
+          <div className={styles.modalOverlay}>
+            <div className={styles.modal}>
+              <p>Votre message a été envoyé avec succès !</p>
+              <button className={styles.okButton} onClick={handleReload}>OK</button>
             </div>
-          )}
+          </div>
+        )}
 
-          <form className={styles.contactform} onSubmit={handleSubmit}>
-            <div className={styles.line1}>
-              <input
-                type='text'
-                name='name'
-                placeholder='Nom'
-                className={styles.form1}
-                id='name'
-                value={formData.name}
-                onChange={handleChange}
-              />
-              <input
-                type='email'
-                name='email'
-                placeholder='Adresse Email'
-                className={styles.form1}
-                id='email'
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-
+        <form className={styles.contactForm} onSubmit={handleSubmit}>
+          <div className={styles.formRow}>
             <input
-              type='text'
-              name='subject'
-              placeholder='Sujet'
-              className={styles.line2}
-              value={formData.subject}
+              type="text"
+              name="name"
+              placeholder="Nom"
+              value={formData.name}
               onChange={handleChange}
             />
-
-            <textarea
-              name='message'
-              placeholder='Message'
-              className={styles.line3}
-              value={formData.message}
+            <input
+              type="email"
+              name="email"
+              placeholder="Adresse Email"
+              value={formData.email}
               onChange={handleChange}
             />
-
-            <button type='submit' className={styles.formBtn}>
-              Envoyer
-            </button>
-          </form>
-        </div>
-      </div>
+          </div>
+          <input
+            type="text"
+            name="subject"
+            placeholder="Sujet"
+            value={formData.subject}
+            onChange={handleChange}
+          />
+          <textarea
+            name="message"
+            placeholder="Message"
+            value={formData.message}
+            onChange={handleChange}
+          />
+          <button type="submit" className={styles.submitBtn}>Envoyer</button>
+        </form>
+      </section>
     </div>
   );
 };
