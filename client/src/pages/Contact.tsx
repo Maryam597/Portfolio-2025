@@ -43,6 +43,7 @@ const Contact = () => {
         <p>Pour toute question ou projet, notre équipe est disponible pour vous répondre rapidement.</p>
       </header>
 
+      <div className={styles.contactInfoContainer}>
       <section className={styles.contactInfo}>
         {/* <div className={styles.infoCard}>
           <p>☎️ Joignable par téléphone 7/7J de 9h à 21h</p>
@@ -102,6 +103,7 @@ const Contact = () => {
           <button type="submit" className={styles.submitBtn}>Envoyer</button>
         </form>
       </section>
+      </div>
     </div>
   );
 };
