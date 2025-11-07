@@ -79,52 +79,93 @@
   transform: translateY(-3px);
 }
 
+
+/* ===== CARDS ===== */
 .cards {
   display: flex;
   justify-content: center;
+  align-items: stretch;
   gap: 2rem;
   margin-top: 200px;
   flex-wrap: wrap;
+  padding: 2rem;
 }
 
 .card {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
+  background: rgba(15, 25, 35, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
   width: 300px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-align: center;
+  border: 1px solid rgba(89, 124, 164, 0.3);
+  box-shadow: 0 0 20px rgba(89, 124, 164, 0.15);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Effet de lueur douce au survol */
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 0 25px rgba(89, 124, 164, 0.4);
+  border-color: rgba(89, 124, 164, 0.6);
+}
+
+/* Halo animé dans le fond de la carte */
+.card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at top left, rgba(89, 124, 164, 0.25), transparent 70%);
+  opacity: 0.3;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.card:hover::before {
+  opacity: 0.6;
 }
 
 .card h3 {
+  color: #88add6;
+  font-size: 1.4rem;
   margin-bottom: 1rem;
-  color: #153a5f;
+  z-index: 1;
+  position: relative;
+  text-shadow: 0 0 8px rgba(136, 173, 214, 0.7);
 }
 
 .card p {
-  color: #555;
-  margin-bottom: 1rem;
+  color: #d0d7e2;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  z-index: 1;
+  position: relative;
 }
 
 .card a {
   display: inline-block;
-  padding: 0.5rem 1rem;
-  background: #597ca4;
-  color: white;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, #597ca4, #4a90e2);
+  color: #fff;
   border-radius: 8px;
   text-decoration: none;
-  transition: background 0.2s ease;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.2s ease;
+  z-index: 1;
+  position: relative;
 }
 
 .card a:hover {
-  background: #88add6;
+  background: linear-gradient(135deg, #88add6, #6ba3e0);
+  transform: translateY(-3px);
+  box-shadow: 0 0 10px rgba(136, 173, 214, 0.6);
 }
+
 
 
 

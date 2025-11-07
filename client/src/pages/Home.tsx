@@ -80,8 +80,8 @@ const Home: React.FC = () => {
       activeCube === cube
         ? styles.techBubblesBottom
         : hoverCube === cube && !activeCube
-        ? styles.techBubblesTop
-        : "";
+          ? styles.techBubblesTop
+          : "";
 
     if (!wrapperClass) return null;
 
@@ -191,24 +191,32 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      {/* ===== CARDS ===== */}
       <section className={styles.cards}>
         <div className={styles.card}>
           <h3>💼 Services</h3>
           <p>Découvrez ce que je propose</p>
-          <Link to="/services">Voir plus</Link>
+          <Link to="/services" className={styles.cardBtn}>
+            Voir plus
+          </Link>
         </div>
+
         <div className={styles.card}>
           <h3>📂 Projets</h3>
           <p>Un aperçu de mes réalisations</p>
-          <Link to="/projects">Voir plus</Link>
+          <Link to="/projects" className={styles.cardBtn}>
+            Voir plus
+          </Link>
         </div>
+
         <div className={styles.card}>
           <h3>📩 Contact</h3>
           <p>Discutons de votre projet</p>
-          <Link to="/contact">Me contacter</Link>
+          <Link to="/contact" className={styles.cardBtn}>
+            Me contacter
+          </Link>
         </div>
       </section>
+
     </div>
   );
 };
