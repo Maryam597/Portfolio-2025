@@ -181,7 +181,7 @@ const AdminDashboard = () => {
   // ---- ACCORDÉON PROJECTS ----
   const [openProjectId, setOpenProjectId] = useState<number | null>(null);
   const toggleProjectAccordion = (id: number) => {
-    setOpenProjectId(openProjectId === id ? null : id);
+    setOpenProjectId(prev => (prev === id ? null : id));
   };
 
   useEffect(() => {
@@ -324,7 +324,7 @@ const AdminDashboard = () => {
                 handleUpdateProject={handleUpdateProject}
                 handleDeleteProject={handleDeleteProject}
                 handleProjectChange={handleProjectChange}
-                handleFileChange={handleFileChange}
+                handleFileChange={handleFileChange} 
               />
             ))}
           </div>
@@ -367,21 +367,20 @@ const ProjectAccordion: React.FC<ProjectAccordionProps> = ({
     proj.image ? `http://localhost:8000${proj.image}` : null
   );
 
+  const isOpen = openProjectId === proj.ID;
+
   return (
     <div className={styles.card}>
       <div
         className={styles.accordionHeader}
-        onClick={(e) => {
-          e.preventDefault();
-          toggleProjectAccordion(proj.ID);
-        }}
+        onClick={() => toggleProjectAccordion(proj.ID)}
         style={{ cursor: "pointer" }}
       >
         <h4>{proj.title}</h4>
-        <span>{openProjectId === proj.ID ? "▲" : "▼"}</span>
+        <span>{isOpen ? "▲" : "▼"}</span>
       </div>
 
-      {openProjectId === proj.ID && (
+      {isOpen && (
         <div className={styles.accordionContent}>
           {editPreview && (
             <img src={editPreview} alt={editData.title} className={styles.projectImg} />
