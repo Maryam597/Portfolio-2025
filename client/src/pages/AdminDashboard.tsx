@@ -109,7 +109,7 @@ const AdminDashboard = () => {
     formData.append("title", projectData.title);
     formData.append("summary", projectData.summary);
     formData.append("description", projectData.description);
-    formData.append("technologies", projectData.technologies);
+    formData.append("technologies", JSON.stringify(projectData.technologies.split(",").map(t => t.trim())));
     formData.append("link_demo", projectData.link_demo);
     formData.append("link_github", projectData.link_github);
     formData.append("created_at", new Date().toISOString());
@@ -145,7 +145,7 @@ const AdminDashboard = () => {
     formData.append("title", data.title);
     formData.append("summary", data.summary);
     formData.append("description", data.description);
-    formData.append("technologies", data.technologies);
+    formData.append("technologies", JSON.stringify(data.technologies.split(",").map((t: string) => t.trim())));
     formData.append("link_demo", data.link_demo);
     formData.append("link_github", data.link_github);
     formData.append("created_at", new Date().toISOString());
@@ -307,9 +307,7 @@ const AdminDashboard = () => {
               accept="image/*"
               onChange={(e) => handleFileChange(e, setImageFile, setImagePreview)}
             />
-            {imagePreview && (
-              <img src={imagePreview} alt="Prévisualisation" className={styles.previewImg} />
-            )}
+            {imagePreview && <img src={imagePreview} alt="Prévisualisation" className={styles.previewImg} />}
             <button type="submit">🚀 Ajouter</button>
           </form>
 
@@ -317,14 +315,14 @@ const AdminDashboard = () => {
           <div className={styles.list}>
             {projects.map((proj) => (
               <ProjectAccordion
-                key={proj.ID}
+                key={proj.id}
                 proj={proj}
                 openProjectId={openProjectId}
                 toggleProjectAccordion={toggleProjectAccordion}
                 handleUpdateProject={handleUpdateProject}
                 handleDeleteProject={handleDeleteProject}
                 handleProjectChange={handleProjectChange}
-                handleFileChange={handleFileChange} 
+                handleFileChange={handleFileChange}
               />
             ))}
           </div>
@@ -363,32 +361,26 @@ const ProjectAccordion: React.FC<ProjectAccordionProps> = ({
 }) => {
   const [editData, setEditData] = useState({ ...proj });
   const [editFile, setEditFile] = useState<File | null>(null);
-  const [editPreview, setEditPreview] = useState(
-    proj.image ? `http://localhost:8000${proj.image}` : null
-  );
-
-  const isOpen = openProjectId === proj.ID;
+  const [editPreview, setEditPreview] = useState(proj.image ? `http://localhost:8000${proj.image}` : null);
 
   return (
     <div className={styles.card}>
       <div
         className={styles.accordionHeader}
-        onClick={() => toggleProjectAccordion(proj.ID)}
+        onClick={() => toggleProjectAccordion(proj.id)}
         style={{ cursor: "pointer" }}
       >
         <h4>{proj.title}</h4>
-        <span>{isOpen ? "▲" : "▼"}</span>
+        <span>{openProjectId === proj.id ? "▲" : "▼"}</span>
       </div>
 
-      {isOpen && (
-        <div className={styles.accordionContent}>
-          {editPreview && (
-            <img src={editPreview} alt={editData.title} className={styles.projectImg} />
-          )}
+      {openProjectId === proj.id && (
+        <div className={styles.accordionContent} style={{ display: "block" }}>
+          {editPreview && <img src={editPreview} alt={editData.title} className={styles.projectImg} />}
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              handleUpdateProject(proj.ID, editData, editFile);
+              handleUpdateProject(proj.id, editData, editFile);
             }}
             className={styles.form}
           >
@@ -430,7 +422,7 @@ const ProjectAccordion: React.FC<ProjectAccordionProps> = ({
               onChange={(e) => handleFileChange(e, setEditFile, setEditPreview)}
             />
             <button type="submit">💾 Modifier</button>
-            <button type="button" onClick={() => handleDeleteProject(proj.ID)}>🗑️ Supprimer</button>
+            <button type="button" onClick={() => handleDeleteProject(proj.id)}>🗑️ Supprimer</button>
           </form>
         </div>
       )}

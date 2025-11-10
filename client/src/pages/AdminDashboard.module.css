@@ -224,6 +224,15 @@ img {
   border-radius: 8px;
 }
 
+.accordionContent {
+  display: none;
+}
+
+.accordionContent.open {
+  display: block;
+}
+
+
 @keyframes fadeIn {
   from {
     transform: scale(0.9);
