@@ -78,6 +78,7 @@ const AdminDashboard = () => {
     link_github: "",
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const fetchProjects = async () => {
     try {
@@ -94,7 +95,9 @@ const AdminDashboard = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setImageFile(e.target.files[0]);
+      const file = e.target.files[0];
+      setImageFile(file);
+      setImagePreview(URL.createObjectURL(file));
     }
   };
 
@@ -105,21 +108,14 @@ const AdminDashboard = () => {
     formData.append("title", projectData.title);
     formData.append("summary", projectData.summary);
     formData.append("description", projectData.description);
-    formData.append(
-      "technologies",
-      JSON.stringify(
-        projectData.technologies
-          .split(",")
-          .map((t) => t.trim())
-          .filter((t) => t !== "")
-      )
-    );
+    formData.append("technologies", projectData.technologies);
     formData.append("link_demo", projectData.link_demo);
     formData.append("link_github", projectData.link_github);
+    formData.append("created_at", new Date().toISOString());
     if (imageFile) formData.append("image", imageFile);
 
     try {
-      await axios.post("http://localhost:8000/projects/create", formData, {
+      await axios.post("http://localhost:8000/projects", formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "multipart/form-data",
@@ -135,6 +131,7 @@ const AdminDashboard = () => {
         link_github: "",
       });
       setImageFile(null);
+      setImagePreview(null);
       fetchProjects();
     } catch (error) {
       console.error(error);
@@ -154,12 +151,10 @@ const AdminDashboard = () => {
     }
   };
 
-  // ---- RENDER ----
   return (
     <div className={styles.dashboard}>
       <h1>Admin Dashboard</h1>
 
-      {/* Onglets */}
       <div className={styles.tabs}>
         <button
           className={activeTab === "services" ? styles.active : ""}
@@ -175,7 +170,7 @@ const AdminDashboard = () => {
         </button>
       </div>
 
-      {/* ---- SERVICES TAB ---- */}
+      {/* ----------- SERVICES ----------- */}
       {activeTab === "services" && (
         <div className={styles.tabContent}>
           <form onSubmit={handleServiceSubmit} className={styles.form}>
@@ -223,7 +218,7 @@ const AdminDashboard = () => {
         </div>
       )}
 
-      {/* ---- PROJECTS TAB ---- */}
+      {/* ----------- PROJECTS ----------- */}
       {activeTab === "projects" && (
         <div className={styles.tabContent}>
           <form onSubmit={handleProjectSubmit} className={styles.form}>
@@ -266,11 +261,14 @@ const AdminDashboard = () => {
               value={projectData.link_github}
               onChange={handleProjectChange}
             />
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-            />
+            <input type="file" accept="image/*" onChange={handleFileChange} />
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Prévisualisation"
+                className={styles.previewImg}
+              />
+            )}
             <button type="submit">🚀 Ajouter</button>
           </form>
 
@@ -280,7 +278,7 @@ const AdminDashboard = () => {
               <div key={p.ID} className={styles.card}>
                 {p.image && (
                   <img
-                    src={p.image}
+                    src={`http://localhost:8000${p.image}`}
                     alt={p.title}
                     className={styles.projectImg}
                   />
@@ -298,3 +296,12 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
+
+
+
+
+
+
+
+

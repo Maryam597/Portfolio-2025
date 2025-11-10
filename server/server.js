@@ -31,6 +31,9 @@ app.use('/projects', projectRoutes);
 app.use('/email', emailRoutes);
 app.use('/services', serviceRoutes);
 
+app.use('/uploads', express.static('uploads'));
+
+
 
 app.use(express.static('public'));
 
