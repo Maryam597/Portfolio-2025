@@ -1,0 +1,434 @@
+.home {
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* ===== BANNER ===== */
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  gap: 2rem;
+}
+
+.presentation {
+  flex: 1;
+}
+
+.presentation h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: white;
+  text-shadow: rgb(0, 0, 0) 3px 0px 0px,
+    rgb(0, 0, 0) 0.54px 0.84px 0px,
+    rgb(0, 0, 0) -0.41px 0.9px 0px,
+    rgb(0, 0, 0) -0.98px 0.14px 0px,
+    rgb(0, 0, 0) -0.65px -0.75px 0px,
+    rgb(0, 0, 0) 0.28px -0.95px 0px,
+    rgb(0, 0, 0) 0.96px -0.27px 0px;
+}
+
+.presentation p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: white;
+  text-shadow: rgb(0, 0, 0) 1px 0px 0px,
+    rgb(0, 0, 0) 0.54px 0.84px 0px,
+    rgb(0, 0, 0) -0.41px 0.9px 0px,
+    rgb(0, 0, 0) -0.98px 0.14px 0px,
+    rgb(0, 0, 0) -0.65px -0.75px 0px,
+    rgb(0, 0, 0) 0.28px -0.95px 0px,
+    rgb(0, 0, 0) 0.96px -0.27px 0px;
+}
+
+/* ===== STACKS ===== */
+.stacks {
+  text-align: center;
+  margin: 2rem 0;
+  color: white;
+  text-shadow: rgb(0, 0, 0) 1px 0px 0px,
+    rgb(0, 0, 0) 0.54px 0.84px 0px,
+    rgb(0, 0, 0) -0.41px 0.9px 0px,
+    rgb(0, 0, 0) -0.98px 0.14px 0px,
+    rgb(0, 0, 0) -0.65px -0.75px 0px,
+    rgb(0, 0, 0) 0.28px -0.95px 0px,
+    rgb(0, 0, 0) 0.96px -0.27px 0px;
+}
+
+.stackList {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  color: white;
+}
+
+.stackList span {
+  background: #f0f4f8;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.stackList span:hover {
+  background: #597ca4;
+  color: white;
+  transform: translateY(-3px);
+}
+
+
+/* ===== CARDS ===== */
+.cards {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem;
+  margin-top: 200px;
+  flex-wrap: wrap;
+  padding: 2rem;
+}
+
+.card {
+  background: rgba(15, 25, 35, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  width: 300px;
+  text-align: center;
+  border: 1px solid rgba(89, 124, 164, 0.3);
+  box-shadow: 0 0 20px rgba(89, 124, 164, 0.15);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Effet de lueur douce au survol */
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 0 25px rgba(89, 124, 164, 0.4);
+  border-color: rgba(89, 124, 164, 0.6);
+}
+
+/* Halo animé dans le fond de la carte */
+.card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at top left, rgba(89, 124, 164, 0.25), transparent 70%);
+  opacity: 0.3;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.card:hover::before {
+  opacity: 0.6;
+}
+
+.card h3 {
+  color: #88add6;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  z-index: 1;
+  position: relative;
+  text-shadow: 0 0 8px rgba(136, 173, 214, 0.7);
+}
+
+.card p {
+  color: #d0d7e2;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  z-index: 1;
+  position: relative;
+}
+
+.card a {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, #597ca4, #4a90e2);
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.2s ease;
+  z-index: 1;
+  position: relative;
+}
+
+.card a:hover {
+  background: linear-gradient(135deg, #88add6, #6ba3e0);
+  transform: translateY(-3px);
+  box-shadow: 0 0 10px rgba(136, 173, 214, 0.6);
+}
+
+
+
+
+.cubeContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 100px;
+
+  position: relative;
+}
+
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: translateY(-4px) scale(1.02) rotateX(1deg) rotateY(-1deg);
+  }
+  50% {
+    transform: translateY(0) scale(1) rotateX(0deg) rotateY(0deg);
+  }
+  75% {
+    transform: translateY(3px) scale(0.99) rotateX(-1deg) rotateY(1deg);
+  }
+}
+
+
+.cube {
+  --width: 80px;
+  --height: 80px;
+  --depth: 80px;
+  height: var(--height);
+  width: var(--width);
+  position: relative;
+  margin: 0;
+  transform: rotateX(24deg) rotateY(-45deg);
+  transform-style: preserve-3d;
+
+}
+
+
+
+
+
+.cube_side {
+  position: absolute;
+  height: var(--height);
+  width: var(--width);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* Front / Back */
+.cube_side:nth-of-type(1) {
+  transform: translateZ(calc(var(--depth) / 2));
+}
+.cube_side:nth-of-type(2) {
+  transform: rotateY(180deg) translateZ(calc(var(--depth) / 2));
+}
+
+/* Right / Left */
+.cube_side:nth-of-type(3) {
+  transform: rotateY(90deg) translateZ(calc(var(--width) / 2));
+}
+.cube_side:nth-of-type(4) {
+  transform: rotateY(-90deg) translateZ(calc(var(--width) / 2));
+}
+
+/* Top / Bottom */
+.cube_side:nth-of-type(5) {
+  transform: rotateX(90deg) translateZ(calc(var(--height) / 2));
+}
+.cube_side:nth-of-type(6) {
+  transform: rotateX(-90deg) translateZ(calc(var(--height) / 2));
+}
+
+/* Ombre sous le cube */
+.cube::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%) scale(1.2);
+  width: 100px;
+  height: 20px;
+  background: radial-gradient(rgba(0,0,0,0.4), transparent);
+  filter: blur(4px);
+  opacity: 0.5;
+}
+
+/* ===== COULEURS ===== */
+.cube.frontend .cube_side {
+  background: linear-gradient(135deg, #4a90e2, #1c3d6a);
+}
+
+.cube.backend .cube_side {
+  background: linear-gradient(135deg, #50e3c2, #1a4d3b);
+}
+
+.cube.design .cube_side {
+  background: linear-gradient(135deg, #f5a623, #8e4a00);
+}
+
+.cube.tools .cube_side {
+  background: linear-gradient(135deg, #bd10e0, #5a005a);
+}
+
+
+
+.techList {
+  position: absolute;
+  top: 100%; /* en dessous du cube */
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  color: #153a5f;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  list-style: none;
+  z-index: 10;
+}
+
+.techList li {
+  margin: 0.3rem 0;
+}
+
+
+.techBubble:hover {
+  transform: scale(1.1);
+}
+
+
+
+
+.techBubblesContainer {
+  display: flex;
+  justify-content: center;
+  /* gap: 25px; */
+  position: absolute;
+  /* top: 120%; sous le cube */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+/* .techBubble {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  animation: fadeInRotate 0.5s ease forwards;
+} */
+
+.techBubble {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  font-size: 30px;
+  color: white;
+    background-color: #f0f0f0;
+
+  animation: fadeInRotate 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+
+@keyframes fadeInRotate {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg) scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+
+.cube:hover .techBubble {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.techLogo {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 5px;
+}
+
+.techBubble img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 5px;
+}
+
+
+.cubeWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.techBubblesWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  position: absolute;
+  top: 120%;
+  transform: none !important;
+  z-index: 10;
+}
+
+.techBubblesBottom {
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.techBubblesTop {
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+
+
+
+.techBubble svg {
+  /* color: red; */
+  width: 2rem;
+  height: 2rem;
+}

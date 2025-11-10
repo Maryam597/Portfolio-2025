@@ -8,27 +8,25 @@ const conn = mysql.createConnection({
 });
 
 const createProject = async (req, res) => {
-    const { title, summary, description, image, technologies, link_demo, link_github, created_at } = req.body;
+  const { title, summary, description, technologies, link_demo, link_github, created_at } = req.body;
 
-    // Validate request data
-    if (!title || !summary || !description || !image || !technologies || !link_demo || !link_github || !created_at) {
-        return res.status(400).json({
-            error: 'Missing data for project registration.',
-        });
+  if (!title || !summary || !description || !technologies || !link_demo || !link_github || !created_at) {
+    return res.status(400).json({ error: 'Missing data for project registration.' });
     }
     
-    const imagePath = `/projectpics/${image}`;
+  const imagePath = req.file ? `/uploads/projectpics/${req.file.filename}` : null;
 
-    const query = 'INSERT INTO projects (title, summary, description, image, technologies, link_demo, link_github, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-    conn.query(query, [title, summary, description, imagePath, JSON.stringify(technologies), link_demo, link_github, created_at], (err, result) => {
-        if (err) {
-            console.error('Error registering a project:', err);
-            res.status(500).json({ error: 'Error registering a project.' });
-        } else {
-            const projectId = result.insertId;
-            res.status(201).json({ projectId, message: 'project registered successfully' });
-        }
-    });
+  conn.query(
+    query,
+    [title, summary, description, imagePath, JSON.stringify(technologies.split(',')), link_demo, link_github, created_at],
+    (err, result) => {
+      if (err) {
+        console.error('Error registering project:', err);
+        return res.status(500).json({ error: 'Error registering project.' });
+      }
+      res.status(201).json({ message: 'Project registered successfully', projectId: result.insertId });
+    }
+  );
 };
 
 const getAllProjects = (req, res) => {

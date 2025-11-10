@@ -4,9 +4,9 @@ import styles from "./AdminDashboard.module.css";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("services");
-  const [services, setServices] = useState<any[]>([]);
-  const [editingService, setEditingService] = useState<any | null>(null);
 
+  // ---- SERVICES ----
+  const [services, setServices] = useState<any[]>([]);
   const [serviceData, setServiceData] = useState({
     title: "",
     price: "",
@@ -14,7 +14,6 @@ const AdminDashboard = () => {
     features: "",
   });
 
-  // Charger tous les services
   const fetchServices = async () => {
     try {
       const res = await axios.get("http://localhost:8000/services");
@@ -26,19 +25,15 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     fetchServices();
+    fetchProjects();
   }, []);
 
-  // Gérer les changements dans le formulaire
-  const handleServiceChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleServiceChange = (e: any) => {
     setServiceData({ ...serviceData, [e.target.name]: e.target.value });
   };
 
-  // Envoi (ajout)
-  const handleServiceSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleServiceSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     const payload = {
       ...serviceData,
       features: serviceData.features
@@ -49,9 +44,7 @@ const AdminDashboard = () => {
 
     try {
       await axios.post("http://localhost:8000/services/create", payload, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       alert("✅ Service ajouté !");
       setServiceData({ title: "", price: "", description: "", features: "" });
@@ -62,69 +55,106 @@ const AdminDashboard = () => {
     }
   };
 
-  // Ouvrir la modale d'édition
-  const openEditModal = (service: any) => {
-    setEditingService(service);
-    setServiceData({
-      title: service.title,
-      price: service.price,
-      description: service.description,
-      features: Array.isArray(service.features)
-        ? service.features.join(", ")
-        : service.features || "",
-    });
-  };
-
-  // Enregistrer les modifications
-  const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!editingService) return;
-
-    const payload = {
-      ...serviceData,
-      features: serviceData.features
-        .split(",")
-        .map((f) => f.trim())
-        .filter((f) => f !== ""),
-    };
-
-    try {
-      await axios.put(
-        `http://localhost:8000/services/${editingService.id}`,
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      alert("✅ Service modifié !");
-      setEditingService(null);
-      fetchServices();
-    } catch (error) {
-      console.error(error);
-      alert("❌ Erreur lors de la modification");
-    }
-  };
-
-  // Supprimer
-  const handleDelete = async (id: string) => {
+  const handleDeleteService = async (id: string) => {
     if (!window.confirm("Supprimer ce service ?")) return;
     try {
       await axios.delete(`http://localhost:8000/services/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
-      alert("🗑️ Service supprimé !");
       fetchServices();
     } catch (error) {
       console.error(error);
-      alert("❌ Erreur lors de la suppression");
     }
   };
 
+  // ---- PROJECTS ----
+  const [projects, setProjects] = useState<any[]>([]);
+  const [projectData, setProjectData] = useState({
+    title: "",
+    summary: "",
+    description: "",
+    technologies: "",
+    link_demo: "",
+    link_github: "",
+  });
+  const [imageFile, setImageFile] = useState<File | null>(null);
+
+  const fetchProjects = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/projects/all");
+      setProjects(res.data);
+    } catch (error) {
+      console.error("Erreur chargement projets :", error);
+    }
+  };
+
+  const handleProjectChange = (e: any) => {
+    setProjectData({ ...projectData, [e.target.name]: e.target.value });
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setImageFile(e.target.files[0]);
+    }
+  };
+
+  const handleProjectSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("title", projectData.title);
+    formData.append("summary", projectData.summary);
+    formData.append("description", projectData.description);
+    formData.append(
+      "technologies",
+      JSON.stringify(
+        projectData.technologies
+          .split(",")
+          .map((t) => t.trim())
+          .filter((t) => t !== "")
+      )
+    );
+    formData.append("link_demo", projectData.link_demo);
+    formData.append("link_github", projectData.link_github);
+    if (imageFile) formData.append("image", imageFile);
+
+    try {
+      await axios.post("http://localhost:8000/projects/create", formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      alert("✅ Projet ajouté !");
+      setProjectData({
+        title: "",
+        summary: "",
+        description: "",
+        technologies: "",
+        link_demo: "",
+        link_github: "",
+      });
+      setImageFile(null);
+      fetchProjects();
+    } catch (error) {
+      console.error(error);
+      alert("❌ Erreur lors de l'ajout du projet");
+    }
+  };
+
+  const handleDeleteProject = async (id: string) => {
+    if (!window.confirm("Supprimer ce projet ?")) return;
+    try {
+      await axios.delete(`http://localhost:8000/projects/${id}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      fetchProjects();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // ---- RENDER ----
   return (
     <div className={styles.dashboard}>
       <h1>Admin Dashboard</h1>
@@ -145,134 +175,121 @@ const AdminDashboard = () => {
         </button>
       </div>
 
-      <div className={styles.tabContent}>
-        {activeTab === "services" && (
-          <>
-            {/* Formulaire d'ajout */}
-            <form className={styles.form} onSubmit={handleServiceSubmit}>
-              <h2>Ajouter un service</h2>
-              <input
-                type="text"
-                name="title"
-                placeholder="Titre du service"
-                value={serviceData.title}
-                onChange={handleServiceChange}
-                required
-              />
-              <input
-                type="text"
-                name="price"
-                placeholder="Prix (€)"
-                value={serviceData.price}
-                onChange={handleServiceChange}
-                required
-              />
-              <textarea
-                name="description"
-                placeholder="Description"
-                value={serviceData.description}
-                onChange={handleServiceChange}
-                required
-              />
-              <input
-                type="text"
-                name="features"
-                placeholder="Caractéristiques (séparées par des virgules)"
-                value={serviceData.features}
-                onChange={handleServiceChange}
-              />
-              <button type="submit">Enregistrer</button>
-            </form>
+      {/* ---- SERVICES TAB ---- */}
+      {activeTab === "services" && (
+        <div className={styles.tabContent}>
+          <form onSubmit={handleServiceSubmit} className={styles.form}>
+            <h2>Ajouter un service</h2>
+            <input
+              name="title"
+              placeholder="Titre du service"
+              value={serviceData.title}
+              onChange={handleServiceChange}
+              required
+            />
+            <input
+              name="price"
+              placeholder="Prix (€)"
+              value={serviceData.price}
+              onChange={handleServiceChange}
+              required
+            />
+            <textarea
+              name="description"
+              placeholder="Description"
+              value={serviceData.description}
+              onChange={handleServiceChange}
+              required
+            />
+            <input
+              name="features"
+              placeholder="Caractéristiques (séparées par des virgules)"
+              value={serviceData.features}
+              onChange={handleServiceChange}
+            />
+            <button type="submit">💾 Enregistrer</button>
+          </form>
 
-            {/* Liste des services */}
-            <h3>📋 Services existants</h3>
-            <div className={styles.serviceList}>
-              {services.map((service) => (
-                <div key={service.id} className={styles.serviceCard}>
-                  <div>
-                    <h4>{service.title}</h4>
-                    <p className={styles.price}>{service.price} €</p>
-                    <p className={styles.desc}>{service.description}</p>
-                    {Array.isArray(service.features) && (
-                      <ul>
-                        {service.features.map((f: string, i: number) => (
-                          <li key={i}>{f}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                  <div className={styles.actions}>
-                    <button
-                      className={styles.editBtn}
-                      onClick={() => openEditModal(service)}
-                    >
-                      ✏️ Modifier
-                    </button>
-                    <button
-                      className={styles.deleteBtn}
-                      onClick={() => handleDelete(service.id)}
-                    >
-                      🗑️ Supprimer
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-        {activeTab === "projects" && <p>Section projets à venir</p>}
-      </div>
-
-      {/* Modale d'édition */}
-      {editingService && (
-        <div
-          className={styles.modalOverlay}
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setEditingService(null);
-          }}
-        >
-          <div className={styles.modal}>
-            <h3>Modifier le service</h3>
-            <form onSubmit={handleUpdate} className={styles.form}>
-              <input
-                type="text"
-                name="title"
-                value={serviceData.title}
-                onChange={handleServiceChange}
-                required
-              />
-              <input
-                type="text"
-                name="price"
-                value={serviceData.price}
-                onChange={handleServiceChange}
-                required
-              />
-              <textarea
-                name="description"
-                value={serviceData.description}
-                onChange={handleServiceChange}
-                required
-              />
-              <input
-                type="text"
-                name="features"
-                value={serviceData.features}
-                onChange={handleServiceChange}
-              />
-              <div className={styles.modalActions}>
-                <button type="submit" className={styles.saveBtn}>
-                  💾 Enregistrer
-                </button>
-                <button
-                  type="button"
-                  className={styles.cancelBtn}
-                  onClick={() => setEditingService(null)}
-                >
-                  Annuler
-                </button>
+          <h3>📋 Services existants</h3>
+          <div className={styles.list}>
+            {services.map((s) => (
+              <div key={s.id} className={styles.card}>
+                <h4>{s.title}</h4>
+                <p>{s.description}</p>
+                <button onClick={() => handleDeleteService(s.id)}>🗑️</button>
               </div>
-            </form>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ---- PROJECTS TAB ---- */}
+      {activeTab === "projects" && (
+        <div className={styles.tabContent}>
+          <form onSubmit={handleProjectSubmit} className={styles.form}>
+            <h2>Ajouter un projet</h2>
+            <input
+              name="title"
+              placeholder="Titre du projet"
+              value={projectData.title}
+              onChange={handleProjectChange}
+              required
+            />
+            <input
+              name="summary"
+              placeholder="Résumé court"
+              value={projectData.summary}
+              onChange={handleProjectChange}
+            />
+            <textarea
+              name="description"
+              placeholder="Description complète"
+              value={projectData.description}
+              onChange={handleProjectChange}
+              required
+            />
+            <input
+              name="technologies"
+              placeholder="Technologies (séparées par des virgules)"
+              value={projectData.technologies}
+              onChange={handleProjectChange}
+            />
+            <input
+              name="link_demo"
+              placeholder="Lien vers la démo"
+              value={projectData.link_demo}
+              onChange={handleProjectChange}
+            />
+            <input
+              name="link_github"
+              placeholder="Lien GitHub"
+              value={projectData.link_github}
+              onChange={handleProjectChange}
+            />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+            />
+            <button type="submit">🚀 Ajouter</button>
+          </form>
+
+          <h3>📁 Projets existants</h3>
+          <div className={styles.list}>
+            {projects.map((p) => (
+              <div key={p.ID} className={styles.card}>
+                {p.image && (
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className={styles.projectImg}
+                  />
+                )}
+                <h4>{p.title}</h4>
+                <p>{p.summary}</p>
+                <button onClick={() => handleDeleteProject(p.ID)}>🗑️</button>
+              </div>
+            ))}
           </div>
         </div>
       )}
