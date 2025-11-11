@@ -32,9 +32,10 @@
 .contactInfoContainer {
   display: flex;
   gap: 3rem;
-  flex-direction: row;
+  flex-direction: row-reverse;
   justify-content: center;
   width: 100%;
+
 }
 
 .contactInfo {
