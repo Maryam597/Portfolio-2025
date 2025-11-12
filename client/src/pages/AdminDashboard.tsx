@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./AdminDashboard.module.css";
 
+const API_URL = "http://localhost:8000";
+
 // ---------- COMPOSANT PRINCIPAL ----------
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState<"services" | "projects">("services");
@@ -15,9 +17,14 @@ const AdminDashboard = () => {
     features: "",
   });
 
+  const [openServiceId, setOpenServiceId] = useState<number | null>(null);
+  const toggleServiceAccordion = (id: number) => {
+    setOpenServiceId((prev) => (prev === id ? null : id));
+  };
+
   const fetchServices = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/services");
+      const res = await axios.get(`${API_URL}/services`);
       setServices(res.data);
     } catch (error) {
       console.error("Erreur de chargement des services :", error);
@@ -38,7 +45,7 @@ const AdminDashboard = () => {
         .filter((f) => f !== ""),
     };
     try {
-      await axios.post("http://localhost:8000/services/create", payload, {
+      await axios.post(`${API_URL}/services/create`, payload, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       alert("✅ Service ajouté !");
@@ -50,10 +57,30 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleDeleteService = async (id: string) => {
+  const handleUpdateService = async (id: number, data: any) => {
+    const payload = {
+      ...data,
+      features: data.features
+        .split(",")
+        .map((f: string) => f.trim())
+        .filter((f: string) => f !== ""),
+    };
+    try {
+      await axios.put(`${API_URL}/services/${id}`, payload, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      alert("✅ Service mis à jour !");
+      fetchServices();
+    } catch (error) {
+      console.error(error);
+      alert("❌ Erreur lors de la mise à jour du service");
+    }
+  };
+
+  const handleDeleteService = async (id: number) => {
     if (!window.confirm("Supprimer ce service ?")) return;
     try {
-      await axios.delete(`http://localhost:8000/services/${id}`, {
+      await axios.delete(`${API_URL}/services/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       fetchServices();
@@ -74,10 +101,14 @@ const AdminDashboard = () => {
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [openProjectId, setOpenProjectId] = useState<number | null>(null);
+  const toggleProjectAccordion = (id: number) => {
+    setOpenProjectId((prev) => (prev === id ? null : id));
+  };
 
   const fetchProjects = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/projects/all");
+      const res = await axios.get(`${API_URL}/projects/all`);
       setProjects(res.data);
     } catch (error) {
       console.error("Erreur de chargement des projets :", error);
@@ -109,14 +140,17 @@ const AdminDashboard = () => {
     formData.append("title", projectData.title);
     formData.append("summary", projectData.summary);
     formData.append("description", projectData.description);
-    formData.append("technologies", JSON.stringify(projectData.technologies.split(",").map(t => t.trim())));
+    formData.append(
+      "technologies",
+      JSON.stringify(projectData.technologies.split(",").map((t) => t.trim()))
+    );
     formData.append("link_demo", projectData.link_demo);
     formData.append("link_github", projectData.link_github);
     formData.append("created_at", new Date().toISOString());
     if (imageFile) formData.append("image", imageFile);
 
     try {
-      await axios.post("http://localhost:8000/projects/create", formData, {
+      await axios.post(`${API_URL}/projects/create`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "multipart/form-data",
@@ -145,14 +179,17 @@ const AdminDashboard = () => {
     formData.append("title", data.title);
     formData.append("summary", data.summary);
     formData.append("description", data.description);
-    formData.append("technologies", JSON.stringify(data.technologies.split(",").map((t: string) => t.trim())));
+    formData.append(
+      "technologies",
+      JSON.stringify(data.technologies.split(",").map((t: string) => t.trim()))
+    );
     formData.append("link_demo", data.link_demo);
     formData.append("link_github", data.link_github);
     formData.append("created_at", new Date().toISOString());
     if (file) formData.append("image", file);
 
     try {
-      await axios.put(`http://localhost:8000/projects/${id}`, formData, {
+      await axios.put(`${API_URL}/projects/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "multipart/form-data",
@@ -169,7 +206,7 @@ const AdminDashboard = () => {
   const handleDeleteProject = async (id: number) => {
     if (!window.confirm("Supprimer ce projet ?")) return;
     try {
-      await axios.delete(`http://localhost:8000/projects/${id}`, {
+      await axios.delete(`${API_URL}/projects/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       fetchProjects();
@@ -178,18 +215,11 @@ const AdminDashboard = () => {
     }
   };
 
-  // ---- ACCORDÉON PROJECTS ----
-  const [openProjectId, setOpenProjectId] = useState<number | null>(null);
-  const toggleProjectAccordion = (id: number) => {
-    setOpenProjectId(prev => (prev === id ? null : id));
-  };
-
   useEffect(() => {
     fetchServices();
     fetchProjects();
   }, []);
 
-  // ---------- RENDER ----------
   return (
     <div className={styles.dashboard}>
       <h1>Admin Dashboard</h1>
@@ -249,11 +279,14 @@ const AdminDashboard = () => {
           <h3>📋 Services existants</h3>
           <div className={styles.list}>
             {services.map((s) => (
-              <div key={s.id} className={styles.card}>
-                <h4>{s.title}</h4>
-                <p>{s.description}</p>
-                <button type="button" onClick={() => handleDeleteService(s.id)}>🗑️</button>
-              </div>
+              <ServiceAccordion
+                key={s.id}
+                service={s}
+                openServiceId={openServiceId}
+                toggleServiceAccordion={toggleServiceAccordion}
+                handleUpdateService={handleUpdateService}
+                handleDeleteService={handleDeleteService}
+              />
             ))}
           </div>
         </div>
@@ -332,6 +365,82 @@ const AdminDashboard = () => {
   );
 };
 
+// ---------- ACCORDÉON SERVICE ----------
+interface ServiceAccordionProps {
+  service: any;
+  openServiceId: number | null;
+  toggleServiceAccordion: (id: number) => void;
+  handleUpdateService: (id: number, data: any) => void;
+  handleDeleteService: (id: number) => void;
+}
+
+const ServiceAccordion: React.FC<ServiceAccordionProps> = ({
+  service,
+  openServiceId,
+  toggleServiceAccordion,
+  handleUpdateService,
+  handleDeleteService,
+}) => {
+  const [editData, setEditData] = useState({ ...service });
+
+  return (
+    <div className={styles.card}>
+      <div
+        className={styles.accordionHeader}
+        onClick={() => toggleServiceAccordion(service.id)}
+        style={{ cursor: "pointer" }}
+      >
+        <h4>{service.title}</h4>
+        <span>{openServiceId === service.id ? "▲" : "▼"}</span>
+      </div>
+
+      {openServiceId === service.id && (
+        <div className={styles.accordionContent} style={{ display: "block" }}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleUpdateService(service.id, editData);
+            }}
+            className={styles.form}
+          >
+            <input
+              name="title"
+              value={editData.title}
+              onChange={(e) => setEditData({ ...editData, title: e.target.value })}
+              required
+            />
+            <input
+              name="price"
+              value={editData.price}
+              onChange={(e) => setEditData({ ...editData, price: e.target.value })}
+              required
+            />
+            <textarea
+              name="description"
+              value={editData.description}
+              onChange={(e) => setEditData({ ...editData, description: e.target.value })}
+              required
+            />
+            <input
+              name="features"
+              value={
+                Array.isArray(editData.features)
+                  ? editData.features.join(", ")
+                  : editData.features
+              }
+              onChange={(e) => setEditData({ ...editData, features: e.target.value })}
+            />
+            <button type="submit">💾 Modifier</button>
+            <button type="button" onClick={() => handleDeleteService(service.id)}>
+              🗑️ Supprimer
+            </button>
+          </form>
+        </div>
+      )}
+    </div>
+  );
+};
+
 // ---------- ACCORDÉON PROJET ----------
 interface ProjectAccordionProps {
   proj: any;
@@ -361,7 +470,9 @@ const ProjectAccordion: React.FC<ProjectAccordionProps> = ({
 }) => {
   const [editData, setEditData] = useState({ ...proj });
   const [editFile, setEditFile] = useState<File | null>(null);
-  const [editPreview, setEditPreview] = useState(proj.image ? `http://localhost:8000${proj.image}` : null);
+  const [editPreview, setEditPreview] = useState(
+    proj.image ? `${API_URL}${proj.image}` : null
+  );
 
   return (
     <div className={styles.card}>
@@ -422,7 +533,9 @@ const ProjectAccordion: React.FC<ProjectAccordionProps> = ({
               onChange={(e) => handleFileChange(e, setEditFile, setEditPreview)}
             />
             <button type="submit">💾 Modifier</button>
-            <button type="button" onClick={() => handleDeleteProject(proj.id)}>🗑️ Supprimer</button>
+            <button type="button" onClick={() => handleDeleteProject(proj.id)}>
+              🗑️ Supprimer
+            </button>
           </form>
         </div>
       )}
