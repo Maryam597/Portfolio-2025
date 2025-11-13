@@ -1,55 +1,55 @@
 {
-  "home": {
-    "title": "Développeuse Web Full-Stack",
-    "intro": "Je suis développeuse spécialisée en <0>Front-end</0> et <1>Back-end</1>. Je vous accompagne dans la création de sites web et d'applications sur mesure, et je donne vie à vos idées.",
-    "cube": {
-      "frontend": "FrontEnd",
-      "backend": "Backend",
-      "design": "Design",
-      "tools": "Outils"
+    "home": {
+        "title": "Développeuse Web Full-Stack",
+        "intro": "Je suis développeuse spécialisée en <0>Front-end</0> et <1>Back-end</1>. Je vous accompagne dans la création de sites web et d'applications sur mesure, et je donne vie à vos idées.",
+        "cube": {
+            "frontend": "FrontEnd",
+            "backend": "Backend",
+            "design": "Design",
+            "tools": "Outils"
+        },
+        "cards": {
+            "services": {
+                "title": "💼 Services",
+                "desc": "Découvrez ce que je propose",
+                "cta": "Voir plus"
+            },
+            "projects": {
+                "title": "📂 Projets",
+                "desc": "Un aperçu de mes réalisations",
+                "cta": "Voir plus"
+            },
+            "contact": {
+                "title": "📩 Contact",
+                "desc": "Discutons de votre projet",
+                "cta": "Me contacter"
+            }
+        }
     },
-    "cards": {
-      "services": {
-        "title": "💼 Services",
-        "desc": "Découvrez ce que je propose",
-        "cta": "Voir plus"
-      },
-      "projects": {
-        "title": "📂 Projets",
-        "desc": "Un aperçu de mes réalisations",
-        "cta": "Voir plus"
-      },
-      "contact": {
-        "title": "📩 Contact",
-        "desc": "Discutons de votre projet",
-        "cta": "Me contacter"
-      }
+    "tech": {
+        "React": "React",
+        "HTML5": "HTML5",
+        "CSS3": "CSS3",
+        "JavaScript": "JavaScript",
+        "Angular": "Angular",
+        "Vue.js": "Vue.js",
+        "TypeScript": "TypeScript",
+        "Next.js": "Next.js",
+        "Tailwind": "Tailwind",
+        "Spring Boot": "Spring Boot",
+        "PHP": "PHP",
+        "Node.js": "Node.js",
+        "Java": "Java",
+        "Express": "Express",
+        "Figma": "Figma",
+        "Bootstrap": "Bootstrap",
+        "Canva": "Canva",
+        "Illustrator": "Illustrator",
+        "Sketch": "Sketch",
+        "MySQL": "MySQL",
+        "MongoDB": "MongoDB",
+        "Postman": "Postman",
+        "Docker": "Docker",
+        "Git": "Git"
     }
-  },
-  "tech": {
-    "React": "React",
-    "HTML5": "HTML5",
-    "CSS3": "CSS3",
-    "JavaScript": "JavaScript",
-    "Angular": "Angular",
-    "Vue.js": "Vue.js",
-    "TypeScript": "TypeScript",
-    "Next.js": "Next.js",
-    "Tailwind": "Tailwind",
-    "Spring Boot": "Spring Boot",
-    "PHP": "PHP",
-    "Node.js": "Node.js",
-    "Java": "Java",
-    "Express": "Express",
-    "Figma": "Figma",
-    "Bootstrap": "Bootstrap",
-    "Canva": "Canva",
-    "Illustrator": "Illustrator",
-    "Sketch": "Sketch",
-    "MySQL": "MySQL",
-    "MongoDB": "MongoDB",
-    "Postman": "Postman",
-    "Docker": "Docker",
-    "Git": "Git"
-  }
 }

@@ -14,7 +14,7 @@ import React from "react";
 type CubeName = "frontend" | "backend" | "design" | "tools";
 
 const Home: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [activeCube, setActiveCube] = useState<CubeName | null>(null);
   const [hoverCube, setHoverCube] = useState<CubeName | null>(null);
 
@@ -85,12 +85,10 @@ const Home: React.FC = () => {
         <div className={styles.presentation}>
           <h1>{t("home.title")}</h1>
 
-          <p>
-            <Trans
-              i18nKey="home.intro"
-              components={[<strong key="0" />, <strong key="1" />]}
-            />
-          </p>
+<p dangerouslySetInnerHTML={{ __html: t("home.intro") }} /> 
+
+
+
 
         </div>
       </section>
@@ -115,7 +113,6 @@ const Home: React.FC = () => {
           {renderTechBubbles("frontend", frontendTech)}
         </div>
 
-        {/* BACKEND */}
         <div className={styles.cubeWrapper}>
           <div
             className={`${styles.cube} ${styles.backend}`}
