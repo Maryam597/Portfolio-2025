@@ -1,0 +1,55 @@
+{
+    "home": {
+        "title": "Full-Stack Web Developer",
+        "intro": "I am a developer specialized in <0>Front-end</0> and <1>Back-end</1>. I help create custom websites and applications and bring your ideas to life.",
+        "cube": {
+            "frontend": "FrontEnd",
+            "backend": "Backend",
+            "design": "Design",
+            "tools": "Tools"
+        },
+        "cards": {
+            "services": {
+                "title": "💼 Services",
+                "desc": "Discover what I offer",
+                "cta": "See more"
+            },
+            "projects": {
+                "title": "📂 Projects",
+                "desc": "A glimpse at my work",
+                "cta": "See more"
+            },
+            "contact": {
+                "title": "📩 Contact",
+                "desc": "Let's discuss your project",
+                "cta": "Contact me"
+            }
+        }
+    },
+    "tech": {
+        "React": "React",
+        "HTML5": "HTML5",
+        "CSS3": "CSS3",
+        "JavaScript": "JavaScript",
+        "Angular": "Angular",
+        "Vue.js": "Vue.js",
+        "TypeScript": "TypeScript",
+        "Next.js": "Next.js",
+        "Tailwind": "Tailwind",
+        "Spring Boot": "Spring Boot",
+        "PHP": "PHP",
+        "Node.js": "Node.js",
+        "Java": "Java",
+        "Express": "Express",
+        "Figma": "Figma",
+        "Bootstrap": "Bootstrap",
+        "Canva": "Canva",
+        "Illustrator": "Illustrator",
+        "Sketch": "Sketch",
+        "MySQL": "MySQL",
+        "MongoDB": "MongoDB",
+        "Postman": "Postman",
+        "Docker": "Docker",
+        "Git": "Git"
+    }
+}

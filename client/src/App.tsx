@@ -9,10 +9,13 @@ import AdminDashboard from './pages/AdminDashboard';
 import Header from './components/Header';
 import Services from './pages/Services';
 import Footer from './components/Footer';
+import LanguageSwitcher from "./components/LanguageSwitcher";
+
 
 function App() {
   return (
     <Router>
+      <LanguageSwitcher />
       <div 
         style={{
           backgroundImage: `url(${background})`,

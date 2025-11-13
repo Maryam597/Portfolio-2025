@@ -1,31 +1,12 @@
 import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
 import { useState } from "react";
+import { useTranslation, Trans } from "react-i18next";
 import {
-  SiReact,
-  SiHtml5,
-  SiCss3,
-  SiJavascript,
-  SiAngular,
-  SiTailwindcss,
-  SiSpringboot,
-  SiPhp,
-  SiNodedotjs,
-  SiFigma,
-  SiBootstrap,
-  SiCanva,
-  SiMysql,
-  SiPostman,
-  SiDocker,
-  SiGit,
-  SiVuedotjs,
-  SiNextdotjs,
-  SiTypescript,
-  SiExpress,
-  SiMongodb,
-  SiAdobeillustrator,
-  SiSketch,
-
+  SiReact, SiHtml5, SiCss3, SiJavascript, SiAngular, SiTailwindcss,
+  SiSpringboot, SiPhp, SiNodedotjs, SiFigma, SiBootstrap, SiCanva,
+  SiMysql, SiPostman, SiDocker, SiGit, SiVuedotjs, SiNextdotjs,
+  SiTypescript, SiExpress, SiMongodb, SiAdobeillustrator, SiSketch
 } from "react-icons/si";
 import { DiJava } from "react-icons/di";
 import React from "react";
@@ -33,6 +14,7 @@ import React from "react";
 type CubeName = "frontend" | "backend" | "design" | "tools";
 
 const Home: React.FC = () => {
+  const { t } = useTranslation();
   const [activeCube, setActiveCube] = useState<CubeName | null>(null);
   const [hoverCube, setHoverCube] = useState<CubeName | null>(null);
 
@@ -41,39 +23,39 @@ const Home: React.FC = () => {
   };
 
   const frontendTech = [
-    { icon: <SiReact />, name: "React", color: "#61DBFB" },
-    { icon: <SiHtml5 />, name: "HTML5", color: "#E34F26" },
-    { icon: <SiCss3 />, name: "CSS3", color: "#264DE4" },
-    { icon: <SiJavascript />, name: "JavaScript", color: "#F0DB4F" },
-    { icon: <SiAngular />, name: "Angular", color: "#DD0031" },
-    { icon: <SiVuedotjs />, name: "Vue.js", color: "#41B883" },
-    { icon: <SiTypescript />, name: "TypeScript", color: "#3178C6" },
-    { icon: <SiNextdotjs />, name: "Next.js", color: "#000000" },
-    { icon: <SiTailwindcss />, name: "Tailwind", color: "#38BDF8" },
+    { icon: <SiReact />, name: t("tech.React"), color: "#61DBFB" },
+    { icon: <SiHtml5 />, name: t("tech.HTML5"), color: "#E34F26" },
+    { icon: <SiCss3 />, name: t("tech.CSS3"), color: "#264DE4" },
+    { icon: <SiJavascript />, name: t("tech.JavaScript"), color: "#F0DB4F" },
+    { icon: <SiAngular />, name: t("tech.Angular"), color: "#DD0031" },
+    { icon: <SiVuedotjs />, name: t("tech.Vue.js"), color: "#41B883" },
+    { icon: <SiTypescript />, name: t("tech.TypeScript"), color: "#3178C6" },
+    { icon: <SiNextdotjs />, name: t("tech.Next.js"), color: "#000000" },
+    { icon: <SiTailwindcss />, name: t("tech.Tailwind"), color: "#38BDF8" }
   ];
 
   const backendTech = [
-    { icon: <SiSpringboot />, name: "Spring Boot", color: "#6DB33F" },
-    { icon: <SiPhp />, name: "PHP", color: "#777BB4" },
-    { icon: <SiNodedotjs />, name: "Node.js", color: "#68A063" },
-    { icon: <DiJava />, name: "Java", color: "#E76F00" },
-    { icon: <SiExpress />, name: "Express", color: "#828282" },
+    { icon: <SiSpringboot />, name: t("tech.Spring Boot"), color: "#6DB33F" },
+    { icon: <SiPhp />, name: t("tech.PHP"), color: "#777BB4" },
+    { icon: <SiNodedotjs />, name: t("tech.Node.js"), color: "#68A063" },
+    { icon: <DiJava />, name: t("tech.Java"), color: "#E76F00" },
+    { icon: <SiExpress />, name: t("tech.Express"), color: "#828282" }
   ];
 
   const designTech = [
-    { icon: <SiFigma />, name: "Figma", color: "#F24E1E" },
-    { icon: <SiBootstrap />, name: "Bootstrap", color: "#7952B3" },
-    { icon: <SiCanva />, name: "Canva", color: "#00C4CC" },
-    { icon: <SiAdobeillustrator />, name: "Illustrator", color: "#FF9A00" },
-    { icon: <SiSketch />, name: "Sketch", color: "#F7B500" },
+    { icon: <SiFigma />, name: t("tech.Figma"), color: "#F24E1E" },
+    { icon: <SiBootstrap />, name: t("tech.Bootstrap"), color: "#7952B3" },
+    { icon: <SiCanva />, name: t("tech.Canva"), color: "#00C4CC" },
+    { icon: <SiAdobeillustrator />, name: t("tech.Illustrator"), color: "#FF9A00" },
+    { icon: <SiSketch />, name: t("tech.Sketch"), color: "#F7B500" }
   ];
 
   const toolsTech = [
-    { icon: <SiMysql />, name: "MySQL", color: "#4479A1" },
-    { icon: <SiMongodb />, name: "MongoDB", color: "#47A248" },
-    { icon: <SiPostman />, name: "Postman", color: "#FF6C37" },
-    { icon: <SiDocker />, name: "Docker", color: "#2496ED" },
-    { icon: <SiGit />, name: "Git", color: "#F1502F" },
+    { icon: <SiMysql />, name: t("tech.MySQL"), color: "#4479A1" },
+    { icon: <SiMongodb />, name: t("tech.MongoDB"), color: "#47A248" },
+    { icon: <SiPostman />, name: t("tech.Postman"), color: "#FF6C37" },
+    { icon: <SiDocker />, name: t("tech.Docker"), color: "#2496ED" },
+    { icon: <SiGit />, name: t("tech.Git"), color: "#F1502F" }
   ];
 
   const renderTechBubbles = (cube: CubeName, techList: any[]) => {
@@ -101,17 +83,19 @@ const Home: React.FC = () => {
     <div className={styles.home}>
       <section className={styles.banner}>
         <div className={styles.presentation}>
-          <h1>Développeuse Web Full-Stack</h1>
+          <h1>{t("home.title")}</h1>
+
           <p>
-            Je suis développeuse spécialisée en <strong>Front-end</strong> et{" "}
-            <strong>Back-end</strong>. Je vous accompagne dans la création de
-            sites web et d'applications sur mesure, et je donne vie à vos idées.
+            <Trans
+              i18nKey="home.intro"
+              components={[<strong key="0" />, <strong key="1" />]}
+            />
           </p>
+
         </div>
       </section>
 
       <div className={styles.cubeContainer}>
-        {/* FRONTEND */}
         <div className={styles.cubeWrapper}>
           <div
             className={`${styles.cube} ${styles.frontend}`}
@@ -121,7 +105,7 @@ const Home: React.FC = () => {
             }
             onClick={() => handleCubeClick("frontend")}
           >
-            <div className={styles.cube_side}>FrontEnd</div>
+            <div className={styles.cube_side}>{t("home.cube.frontend")}</div>
             <div className={styles.cube_side}></div>
             <div className={styles.cube_side}></div>
             <div className={styles.cube_side}></div>
@@ -141,7 +125,7 @@ const Home: React.FC = () => {
             }
             onClick={() => handleCubeClick("backend")}
           >
-            <div className={styles.cube_side}>Backend</div>
+            <div className={styles.cube_side}>{t("home.cube.backend")}</div>
             <div className={styles.cube_side}></div>
             <div className={styles.cube_side}></div>
             <div className={styles.cube_side}></div>
@@ -161,7 +145,7 @@ const Home: React.FC = () => {
             }
             onClick={() => handleCubeClick("design")}
           >
-            <div className={styles.cube_side}>Design</div>
+            <div className={styles.cube_side}>{t("home.cube.design")}</div>
             <div className={styles.cube_side}></div>
             <div className={styles.cube_side}></div>
             <div className={styles.cube_side}></div>
@@ -181,7 +165,7 @@ const Home: React.FC = () => {
             }
             onClick={() => handleCubeClick("tools")}
           >
-            <div className={styles.cube_side}>Outils</div>
+            <div className={styles.cube_side}>{t("home.cube.tools")}</div>
             <div className={styles.cube_side}></div>
             <div className={styles.cube_side}></div>
             <div className={styles.cube_side}></div>
@@ -194,30 +178,29 @@ const Home: React.FC = () => {
 
       <section className={styles.cards}>
         <div className={styles.card}>
-          <h3>💼 Services</h3>
-          <p>Découvrez ce que je propose</p>
+          <h3>{t("home.cards.services.title")}</h3>
+          <p>{t("home.cards.services.desc")}</p>
           <Link to="/services" className={styles.cardBtn}>
-            Voir plus
+            {t("home.cards.services.cta")}
           </Link>
         </div>
 
         <div className={styles.card}>
-          <h3>📂 Projets</h3>
-          <p>Un aperçu de mes réalisations</p>
+          <h3>{t("home.cards.projects.title")}</h3>
+          <p>{t("home.cards.projects.desc")}</p>
           <Link to="/projects" className={styles.cardBtn}>
-            Voir plus
+            {t("home.cards.projects.cta")}
           </Link>
         </div>
 
         <div className={styles.card}>
-          <h3>📩 Contact</h3>
-          <p>Discutons de votre projet</p>
+          <h3>{t("home.cards.contact.title")}</h3>
+          <p>{t("home.cards.contact.desc")}</p>
           <Link to="/contact" className={styles.cardBtn}>
-            Me contacter
+            {t("home.cards.contact.cta")}
           </Link>
         </div>
       </section>
-
     </div>
   );
 };
