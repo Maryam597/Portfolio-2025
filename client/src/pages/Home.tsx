@@ -85,17 +85,17 @@ const Home: React.FC = () => {
         <div className={styles.presentation}>
           <h1>{t("home.title")}</h1>
 
-{/* <p dangerouslySetInnerHTML={{ __html: t("home.intro") }} />  */}
 
 <p>
   <Trans
     i18nKey="home.intro"
     components={[
-      <strong />,  // <0> = <strong>
-      <strong />   // <1> = <strong>
+      <strong />,
+      <strong />
     ]}
   />
 </p>
+
 
 
 
