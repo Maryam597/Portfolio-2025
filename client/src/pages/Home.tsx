@@ -79,6 +79,9 @@ const Home: React.FC = () => {
     );
   };
 
+  console.log("intro =", t("home.intro"));
+  console.log("lang =", i18n.language);
+
   return (
     <div className={styles.home}>
       <section className={styles.banner}>
@@ -86,15 +89,16 @@ const Home: React.FC = () => {
           <h1>{t("home.title")}</h1>
 
 
-<p>
-  <Trans
-    i18nKey="home.intro"
-    components={[
-      <strong />,
-      <strong />
-    ]}
-  />
-</p>
+          <Trans
+            i18nKey="home.intro"
+            components={{
+              0: <p />,
+              1: <strong />,
+              2: <strong />
+            }}
+          />
+
+
 
 
 

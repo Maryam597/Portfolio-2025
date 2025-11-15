@@ -1,7 +1,7 @@
 {
     "home": {
         "title": "Full-Stack Web Developer",
-        "intro": "I am a developer specialized in <0>Front-end</0> and <1>Back-end</1>. I help create custom websites and applications and bring your ideas to life.",
+        "intro": "<0>I am a developer specialized in <1>Front-end</1> and <2>Back-end</2>. I help create custom websites and applications and bring your ideas to life.</0>",
         "cube": {
             "frontend": "FrontEnd",
             "backend": "Backend",
