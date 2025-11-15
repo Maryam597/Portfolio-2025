@@ -88,128 +88,63 @@ const Home: React.FC = () => {
         <div className={styles.presentation}>
           <h1>{t("home.title")}</h1>
 
-
+          {/* Correct usage of Trans with paragraph + bold */}
           <Trans
             i18nKey="home.intro"
             components={{
-              0: <p />,
-              1: <strong />,
-              2: <strong />
+              0: <span />,   // parent wrapper, span avoids cutting le JSX
+              1: <strong />, // Front-end
+              2: <strong />  // Back-end
             }}
           />
-
-
-
-
-
-
         </div>
       </section>
 
+      {/* CUBE SECTION */}
       <div className={styles.cubeContainer}>
-        <div className={styles.cubeWrapper}>
-          <div
-            className={`${styles.cube} ${styles.frontend}`}
-            onMouseEnter={() => setHoverCube("frontend")}
-            onMouseLeave={() =>
-              setHoverCube((prev) => (prev === "frontend" ? null : prev))
-            }
-            onClick={() => handleCubeClick("frontend")}
-          >
-            <div className={styles.cube_side}>{t("home.cube.frontend")}</div>
-            <div className={styles.cube_side}></div>
-            <div className={styles.cube_side}></div>
-            <div className={styles.cube_side}></div>
-            <div className={styles.cube_side}></div>
-            <div className={styles.cube_side}></div>
-          </div>
-          {renderTechBubbles("frontend", frontendTech)}
-        </div>
+        {["frontend", "backend", "design", "tools"].map((cube) => {
+          const cubeClass = styles[cube as CubeName];
+          const cubeTech = {
+            frontend: frontendTech,
+            backend: backendTech,
+            design: designTech,
+            tools: toolsTech
+          }[cube as CubeName];
 
-        <div className={styles.cubeWrapper}>
-          <div
-            className={`${styles.cube} ${styles.backend}`}
-            onMouseEnter={() => setHoverCube("backend")}
-            onMouseLeave={() =>
-              setHoverCube((prev) => (prev === "backend" ? null : prev))
-            }
-            onClick={() => handleCubeClick("backend")}
-          >
-            <div className={styles.cube_side}>{t("home.cube.backend")}</div>
-            <div className={styles.cube_side}></div>
-            <div className={styles.cube_side}></div>
-            <div className={styles.cube_side}></div>
-            <div className={styles.cube_side}></div>
-            <div className={styles.cube_side}></div>
-          </div>
-          {renderTechBubbles("backend", backendTech)}
-        </div>
-
-        {/* DESIGN */}
-        <div className={styles.cubeWrapper}>
-          <div
-            className={`${styles.cube} ${styles.design}`}
-            onMouseEnter={() => setHoverCube("design")}
-            onMouseLeave={() =>
-              setHoverCube((prev) => (prev === "design" ? null : prev))
-            }
-            onClick={() => handleCubeClick("design")}
-          >
-            <div className={styles.cube_side}>{t("home.cube.design")}</div>
-            <div className={styles.cube_side}></div>
-            <div className={styles.cube_side}></div>
-            <div className={styles.cube_side}></div>
-            <div className={styles.cube_side}></div>
-            <div className={styles.cube_side}></div>
-          </div>
-          {renderTechBubbles("design", designTech)}
-        </div>
-
-        {/* OUTILS */}
-        <div className={styles.cubeWrapper}>
-          <div
-            className={`${styles.cube} ${styles.tools}`}
-            onMouseEnter={() => setHoverCube("tools")}
-            onMouseLeave={() =>
-              setHoverCube((prev) => (prev === "tools" ? null : prev))
-            }
-            onClick={() => handleCubeClick("tools")}
-          >
-            <div className={styles.cube_side}>{t("home.cube.tools")}</div>
-            <div className={styles.cube_side}></div>
-            <div className={styles.cube_side}></div>
-            <div className={styles.cube_side}></div>
-            <div className={styles.cube_side}></div>
-            <div className={styles.cube_side}></div>
-          </div>
-          {renderTechBubbles("tools", toolsTech)}
-        </div>
+          return (
+            <div key={cube} className={styles.cubeWrapper}>
+              <div
+                className={`${styles.cube} ${cubeClass}`}
+                onMouseEnter={() => setHoverCube(cube as CubeName)}
+                onMouseLeave={() =>
+                  setHoverCube((prev) => (prev === cube ? null : prev))
+                }
+                onClick={() => handleCubeClick(cube as CubeName)}
+              >
+                <div className={styles.cube_side}>{t(`home.cube.${cube}`)}</div>
+                <div className={styles.cube_side}></div>
+                <div className={styles.cube_side}></div>
+                <div className={styles.cube_side}></div>
+                <div className={styles.cube_side}></div>
+                <div className={styles.cube_side}></div>
+              </div>
+              {renderTechBubbles(cube as CubeName, cubeTech)}
+            </div>
+          );
+        })}
       </div>
 
+      {/* CARDS SECTION */}
       <section className={styles.cards}>
-        <div className={styles.card}>
-          <h3>{t("home.cards.services.title")}</h3>
-          <p>{t("home.cards.services.desc")}</p>
-          <Link to="/services" className={styles.cardBtn}>
-            {t("home.cards.services.cta")}
-          </Link>
-        </div>
-
-        <div className={styles.card}>
-          <h3>{t("home.cards.projects.title")}</h3>
-          <p>{t("home.cards.projects.desc")}</p>
-          <Link to="/projects" className={styles.cardBtn}>
-            {t("home.cards.projects.cta")}
-          </Link>
-        </div>
-
-        <div className={styles.card}>
-          <h3>{t("home.cards.contact.title")}</h3>
-          <p>{t("home.cards.contact.desc")}</p>
-          <Link to="/contact" className={styles.cardBtn}>
-            {t("home.cards.contact.cta")}
-          </Link>
-        </div>
+        {["services", "projects", "contact"].map((card) => (
+          <div key={card} className={styles.card}>
+            <h3>{t(`home.cards.${card}.title`)}</h3>
+            <p>{t(`home.cards.${card}.desc`)}</p>
+            <Link to={`/${card}`} className={styles.cardBtn}>
+              {t(`home.cards.${card}.cta`)}
+            </Link>
+          </div>
+        ))}
       </section>
     </div>
   );
