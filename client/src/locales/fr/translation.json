@@ -105,7 +105,17 @@
     "send": "Envoyer",
     "success": "Votre message a été envoyé avec succès !"
   }
+},
+
+"projects": {
+  "loading": "Chargement des projets...",
+  "error": "Erreur lors de la récupération des projets.",
+  "title": "Mes projets",
+  "subtitle": "Découvrez quelques réalisations web modernes et soignées.",
+  "github": "Voir sur GitHub",
+  "demo": "Voir la démo"
 }
+
 
 
 }

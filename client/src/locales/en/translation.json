@@ -103,7 +103,17 @@
     "send": "Send",
     "success": "Your message has been successfully sent!"
   }
+},
+
+"projects": {
+  "loading": "Loading projects...",
+  "error": "Error while fetching projects.",
+  "title": "My projects",
+  "subtitle": "Discover some modern and polished web creations.",
+  "github": "View on GitHub",
+  "demo": "View demo"
 }
+
 
 
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import styles from './Project.module.css';
+import { useTranslation } from "react-i18next";
 
 interface Project {
     ID: number;
@@ -16,6 +17,7 @@ interface Project {
 }
 
 const Projects = () => {
+    const { t } = useTranslation();  // ✅ i18n
     const [projects, setProjects] = useState<Project[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -33,23 +35,23 @@ const Projects = () => {
                 }));
                 setProjects(data);
             } catch (err) {
-                setError('Erreur lors de la récupération des projets.');
+                setError(t("projects.error"));
             } finally {
                 setLoading(false);
             }
         };
 
         fetchProjects();
-    }, []);
+    }, [t]);
 
-    if (loading) return <p>Chargement des projets...</p>;
+    if (loading) return <p>{t("projects.loading")}</p>;
     if (error) return <p>{error}</p>;
 
     return (
         <div className={styles.projectsPage}>
             <div className={styles.projectsIntro}>
-                <h1>Mes projets</h1>
-                <p>Découvrez quelques réalisations web modernes et soignées.</p>
+                <h1>{t("projects.title")}</h1>
+                <p>{t("projects.subtitle")}</p>
             </div>
 
             <div className={styles.projectsContainer}>
@@ -57,13 +59,15 @@ const Projects = () => {
                     <div key={proj.ID} className={styles.projectCard}>
                         <div className={styles.imageContainer}>
                             {proj.image && (
-                                <img src={`http://localhost:8000${proj.image}`} alt={proj.title} />
+                                <img
+                                    src={`http://localhost:8000${proj.image}`}
+                                    alt={proj.title}
+                                />
                             )}
                             <div className={styles.overlay}>
                                 <p>{proj.description}</p>
                             </div>
                         </div>
-
 
                         <div className={styles.projectContent}>
                             <h2>{proj.title}</h2>
@@ -73,7 +77,7 @@ const Projects = () => {
                                         href={proj.link_github}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        title="Voir sur GitHub"
+                                        title={t("projects.github")}
                                     >
                                         <FaGithub />
                                     </a>
@@ -83,7 +87,7 @@ const Projects = () => {
                                         href={proj.link_demo}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        title="Voir la démo"
+                                        title={t("projects.demo")}
                                     >
                                         <FaExternalLinkAlt />
                                     </a>
