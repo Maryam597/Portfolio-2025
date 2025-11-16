@@ -88,19 +88,16 @@ const Home: React.FC = () => {
         <div className={styles.presentation}>
           <h1>{t("home.title")}</h1>
 
-          {/* Correct usage of Trans with paragraph + bold */}
-          <Trans
-            i18nKey="home.intro"
-            components={{
-              0: <span />,   // parent wrapper, span avoids cutting le JSX
-              1: <strong />, // Front-end
-              2: <strong />  // Back-end
-            }}
-          />
+<p dangerouslySetInnerHTML={{ __html: t("home.intro") }} />
+
+
+
+
+
+
         </div>
       </section>
 
-      {/* CUBE SECTION */}
       <div className={styles.cubeContainer}>
         {["frontend", "backend", "design", "tools"].map((cube) => {
           const cubeClass = styles[cube as CubeName];
@@ -134,7 +131,6 @@ const Home: React.FC = () => {
         })}
       </div>
 
-      {/* CARDS SECTION */}
       <section className={styles.cards}>
         {["services", "projects", "contact"].map((card) => (
           <div key={card} className={styles.card}>

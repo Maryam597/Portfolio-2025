@@ -1,7 +1,7 @@
 {
     "home": {
         "title": "Développeuse Web Full-Stack",
-"intro": "<0>I am a developer specialized in <1>Front-end</1> and <2>Back-end</2>. I help create custom websites and applications and bring your ideas to life.</0>",
+        "intro": "Je suis développeuse spécialisée en <strong>Front-end</strong> et <strong>Back-end</strong>. Je vous accompagne dans la création de sites web et d'applications sur mesure, et je donne vie à vos idées.",
         "cube": {
             "frontend": "FrontEnd",
             "backend": "Backend",
