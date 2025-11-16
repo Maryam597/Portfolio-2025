@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './Contact.module.css';
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -39,70 +42,72 @@ const Contact = () => {
   return (
     <div className={styles.contactPage}>
       <header className={styles.contactHeader}>
-        <h1>Nous contacter</h1>
-        <p>Pour toute question ou projet, notre équipe est disponible pour vous répondre rapidement.</p>
+        <h1>{t("contact.title")}</h1>
+        <p>{t("contact.subtitle")}</p>
       </header>
 
       <div className={styles.contactInfoContainer}>
-      <section className={styles.contactInfo}>
-        {/* <div className={styles.infoCard}>
-          <p>☎️ Joignable par téléphone 7/7J de 9h à 21h</p>
-          <p className={styles.fastAnswer}>Réponse rapide !</p>
-        </div> */}
+        <section className={styles.contactInfo}>
+          <ul className={styles.generalContact}>
+            <li>📞 {t("contact.phone")}</li>
+            <li>📧 {t("contact.email")}</li>
+            <li>📍 {t("contact.location")}</li>
+            {isSmallScreen && <li>{t("contact.company")}</li>}
+          </ul>
+        </section>
 
-        <ul className={styles.generalContact}>
-          <li>📞 07.50.47.46.23</li>
-          <li>📧 maryam.dri@hotmail.fr</li>
-          <li>📍 Villeneuve d’Ascq</li>
-          {isSmallScreen && <li>DL Motors</li>}
-        </ul>
-      </section>
+        <section className={styles.contactFormSection}>
+          <h2>{t("contact.form.title")}</h2>
 
-      <section className={styles.contactFormSection}>
-        <h2>Formulaire de contact</h2>
-
-        {isEmailSent && (
-          <div className={styles.modalOverlay}>
-            <div className={styles.modal}>
-              <p>Votre message a été envoyé avec succès !</p>
-              <button className={styles.okButton} onClick={handleReload}>OK</button>
+          {isEmailSent && (
+            <div className={styles.modalOverlay}>
+              <div className={styles.modal}>
+                <p>{t("contact.form.success")}</p>
+                <button className={styles.okButton} onClick={handleReload}>
+                  OK
+                </button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        <form className={styles.contactForm} onSubmit={handleSubmit}>
-          <div className={styles.formRow}>
+          <form className={styles.contactForm} onSubmit={handleSubmit}>
+            <div className={styles.formRow}>
+              <input
+                type="text"
+                name="name"
+                placeholder={t("contact.form.name")}
+                value={formData.name}
+                onChange={handleChange}
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder={t("contact.form.email")}
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+
             <input
               type="text"
-              name="name"
-              placeholder="Nom"
-              value={formData.name}
+              name="subject"
+              placeholder={t("contact.form.subject")}
+              value={formData.subject}
               onChange={handleChange}
             />
-            <input
-              type="email"
-              name="email"
-              placeholder="Adresse Email"
-              value={formData.email}
+
+            <textarea
+              name="message"
+              placeholder={t("contact.form.message")}
+              value={formData.message}
               onChange={handleChange}
             />
-          </div>
-          <input
-            type="text"
-            name="subject"
-            placeholder="Sujet"
-            value={formData.subject}
-            onChange={handleChange}
-          />
-          <textarea
-            name="message"
-            placeholder="Message"
-            value={formData.message}
-            onChange={handleChange}
-          />
-          <button type="submit" className={styles.submitBtn}>Envoyer</button>
-        </form>
-      </section>
+
+            <button type="submit" className={styles.submitBtn}>
+              {t("contact.form.send")}
+            </button>
+          </form>
+        </section>
       </div>
     </div>
   );

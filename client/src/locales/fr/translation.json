@@ -81,10 +81,31 @@
     "phone": "07.50.47.46.23",
     "email": "maryam.dri@hotmail.fr"
   }
+
+
+
+},
+
+
+  "contact": {
+  "title": "Nous contacter",
+  "subtitle": "Pour toute question ou projet, notre équipe est disponible pour vous répondre rapidement.",
+  
+  "phone": "07.50.47.46.23",
+  "email": "maryam.dri@hotmail.fr",
+  "location": "Villeneuve d’Ascq",
+  "company": "DL Motors",
+
+  "form": {
+    "title": "Formulaire de contact",
+    "name": "Nom",
+    "email": "Adresse Email",
+    "subject": "Sujet",
+    "message": "Message",
+    "send": "Envoyer",
+    "success": "Votre message a été envoyé avec succès !"
+  }
 }
-
-
-
 
 
 }
