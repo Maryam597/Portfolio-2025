@@ -51,5 +51,42 @@
         "Postman": "Postman",
         "Docker": "Docker",
         "Git": "Git"
-    }
+    }, 
+
+
+    "header": {
+  "home": "Accueil",
+  "projects": "Projets",
+  "services": "Services",
+  "contact": "Contact"
+},
+
+"footer": {
+  "usefulLinks": {
+    "title": "Liens Utiles",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "email": "Envoyer un Email"
+  },
+  "pages": {
+    "title": "Pages",
+    "home": "Accueil",
+    "services": "Services",
+    "projects": "Projets",
+    "contact": "Contact"
+  },
+  "informations": {
+    "title": "Informations",
+    "location": "Lille, France",
+    "phone": "07.50.47.46.23",
+    "email": "maryam.dri@hotmail.fr"
+  }
 }
+
+
+
+
+
+}
+
+
