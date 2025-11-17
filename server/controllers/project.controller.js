@@ -9,47 +9,39 @@ const conn = mysql.createConnection({
 });
 
 
-const createProject = (req, res) => {
+export const createProject = async (req, res) => {
   try {
-    const { title, summary, description, technologies, link_demo, link_github } = req.body;
-    const created_at = new Date();
+    const {
+      title,
+      descriptionEn,
+      descriptionFr,
+      summaryEn,
+      summaryFr,
+      images,
+      url,
+      category
+    } = req.body;
 
-
-    const imagePath = req.file ? `/projectpics/${req.file.filename}` : null;
-
-    if (!title || !summary || !description || !imagePath) {
-      return res.status(400).json({ error: 'Champs manquants.' });
-    }
-
-
-    let techArray = [];
-    try {
-      techArray = typeof technologies === 'string' ? JSON.parse(technologies) : technologies;
-    } catch {
-      techArray = [technologies];
-    }
-
-    const query = `
-      INSERT INTO projects 
-      (title, summary, description, image, technologies, link_demo, link_github, created_at) 
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `;
-    conn.query(
-      query,
-      [title, summary, description, imagePath, JSON.stringify(techArray), link_demo, link_github, created_at],
-      (err, result) => {
-        if (err) {
-          console.error('Erreur insertion projet:', err);
-          return res.status(500).json({ error: 'Erreur lors de la création du projet.' });
-        }
-        res.status(201).json({ message: '✅ Projet ajouté avec succès', id: result.insertId });
+    const project = await prisma.project.create({
+      data: {
+        title,
+        descriptionEn,
+        descriptionFr,
+        summaryEn,
+        summaryFr,
+        images,
+        url,
+        category
       }
-    );
+    });
+
+    res.status(201).json(project);
   } catch (error) {
-    console.error('Erreur serveur interne:', error);
-    res.status(500).json({ error: 'Erreur serveur interne.' });
+    console.error(error);
+    res.status(500).json({ message: "Erreur lors de la création du projet" });
   }
 };
+
 
 
 
@@ -82,43 +74,42 @@ const getProjectById = (req, res) => {
 
 
 
-const updateProject = (req, res) => {
-  const projectId = req.params.id;
-  const { title, summary, description, technologies, link_demo, link_github } = req.body;
-  const imagePath = req.file ? `/projectpics/${req.file.filename}` : null;
-  const updated_at = new Date();
-
-  if (!title || !summary || !description) {
-    return res.status(400).json({ error: 'Champs requis manquants.' });
-  }
-
-  let techArray = [];
+export const updateProject = async (req, res) => {
   try {
-    techArray = typeof technologies === 'string' ? JSON.parse(technologies) : technologies;
-  } catch {
-    techArray = [technologies];
+    const { id } = req.params;
+
+    const {
+      title,
+      descriptionEn,
+      descriptionFr,
+      summaryEn,
+      summaryFr,
+      images,
+      url,
+      category
+    } = req.body;
+
+    const updatedProject = await prisma.project.update({
+      where: { id: Number(id) },
+      data: {
+        title,
+        descriptionEn,
+        descriptionFr,
+        summaryEn,
+        summaryFr,
+        images,
+        url,
+        category
+      }
+    });
+
+    res.json(updatedProject);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Erreur lors de la mise à jour du projet" });
   }
-
-  const query = `
-    UPDATE projects 
-    SET title = ?, summary = ?, description = ?, 
-        ${imagePath ? 'image = ?, ' : ''}
-        technologies = ?, link_demo = ?, link_github = ?, created_at = ?
-    WHERE ID = ?
-  `;
-
-  const values = imagePath
-    ? [title, summary, description, imagePath, JSON.stringify(techArray), link_demo, link_github, updated_at, projectId]
-    : [title, summary, description, JSON.stringify(techArray), link_demo, link_github, updated_at, projectId];
-
-  conn.query(query, values, (err, result) => {
-    if (err) {
-      console.error('Erreur mise à jour projet:', err);
-      return res.status(500).json({ error: 'Erreur lors de la mise à jour du projet.' });
-    }
-    res.status(200).json({ message: '✅ Projet mis à jour avec succès.' });
-  });
 };
+
 
 
 
