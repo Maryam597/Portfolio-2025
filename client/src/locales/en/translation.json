@@ -112,7 +112,14 @@
   "subtitle": "Discover some modern and polished web creations.",
   "github": "View on GitHub",
   "demo": "View demo"
-}
+},
+
+
+  "title": "Our Services",
+  "loading": "Loading services...",
+  "error": "Error loading services.",
+  "price": "Price"
+
 
 
 

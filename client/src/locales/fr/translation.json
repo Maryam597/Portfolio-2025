@@ -114,7 +114,13 @@
   "subtitle": "Découvrez quelques réalisations web modernes et soignées.",
   "github": "Voir sur GitHub",
   "demo": "Voir la démo"
-}
+},
+
+
+  "title": "Nos Services",
+  "loading": "Chargement des services...",
+  "error": "Erreur lors de la récupération des services.",
+  "price": "Prix"
 
 
 
