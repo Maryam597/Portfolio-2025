@@ -7,26 +7,42 @@ const conn = mysql.createConnection({
     database: process.env.DB_NAME,
 });
 
-const createService = async (req, res) => {
-    const { title, price, description, features } = req.body;
 
-    if (!title || !price || !description || !features) {
-        return res.status(400).json({
-            error: 'Missing data for service registration.',
-        });
+
+const createService = async (req, res) => {
+    const {
+        title_fr, title_en,
+        description_fr, description_en,
+        features_fr, features_en,
+        price
+    } = req.body;
+
+    if (!title_fr || !title_en || !description_fr || !description_en) {
+        return res.status(400).json({ error: 'Missing multilingual fields.' });
     }
 
-    const query = 'INSERT INTO services (title, price, description, features, created_at) VALUES (?, ?, ?, ?, NOW())';
-    conn.query(query, [title, price, description, JSON.stringify(features)], (err, result) => {
-        if (err) {
-            console.error('Error registering a service:', err);
-            res.status(500).json({ error: 'Error registering a service.' });
-        } else {
-            const serviceId = result.insertId;
-            res.status(201).json({ serviceId, message: 'Service registered successfully' });
+    const query = `
+        INSERT INTO services 
+        (title_fr, title_en, description_fr, description_en, features_fr, features_en, price, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, NOW())
+    `;
+
+    conn.query(
+        query,
+        [
+            title_fr, title_en,
+            description_fr, description_en,
+            JSON.stringify(features_fr),
+            JSON.stringify(features_en),
+            price
+        ],
+        (err, result) => {
+            if (err) return res.status(500).json({ error: 'Error creating service.' });
+            res.status(201).json({ id: result.insertId });
         }
-    });
+    );
 };
+
 
 
 const getAllServices = (req, res) => {
@@ -42,25 +58,39 @@ const getAllServices = (req, res) => {
 };
 
 const updateService = (req, res) => {
-    const serviceId = req.params.id;
-    const { title, price, description, features, created_at } = req.body;
+    const id = req.params.id;
 
-    if (!title || !price || !description || !Array.isArray(features) || features.length === 0) {
-        return res.status(400).json({ error: 'Missing or invalid data for service update.' });
-    }
+    const {
+        title_fr, title_en,
+        description_fr, description_en,
+        features_fr, features_en,
+        price
+    } = req.body;
 
+    const query = `
+        UPDATE services
+        SET title_fr=?, title_en=?, description_fr=?, description_en=?, 
+            features_fr=?, features_en=?, price=?
+        WHERE ID=?
+    `;
 
-
-const query = 'UPDATE services SET title = ?, price = ?, description = ?, features = ?, created_at = ? WHERE ID = ?';
-conn.query(query, [title, price, description, JSON.stringify(features), created_at, serviceId], (err) => {
-    if (err) {
-        console.error('Error updating service:', err);
-        res.status(500).json({ error: 'Error updating service.' });
-    } else {
-        res.status(200).json({ message: 'service updated successfully' });
-    }
-});
+    conn.query(
+        query,
+        [
+            title_fr, title_en,
+            description_fr, description_en,
+            JSON.stringify(features_fr),
+            JSON.stringify(features_en),
+            price,
+            id
+        ],
+        (err) => {
+            if (err) return res.status(500).json({ error: 'Error updating service.' });
+            res.status(200).json({ message: "Service updated successfully" });
+        }
+    );
 };
+
 
 const getServiceById = (req, res) => {
     const serviceId = req.params.id;
