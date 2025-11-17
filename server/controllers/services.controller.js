@@ -7,9 +7,17 @@ const conn = mysql.createConnection({
     database: process.env.DB_NAME,
 });
 
+// Connexion à la DB
+conn.connect((err) => {
+    if (err) {
+        console.error('Erreur de connexion MySQL:', err);
+    } else {
+        console.log('Connecté à la base de données MySQL !');
+    }
+});
 
-
-const createService = async (req, res) => {
+// CREATE
+const createService = (req, res) => {
     const {
         title_fr, title_en,
         description_fr, description_en,
@@ -37,29 +45,46 @@ const createService = async (req, res) => {
             price
         ],
         (err, result) => {
-            if (err) return res.status(500).json({ error: 'Error creating service.' });
+            if (err) {
+                console.error('Erreur création service:', err);
+                return res.status(500).json({ error: 'Error creating service.' });
+            }
             res.status(201).json({ id: result.insertId });
         }
     );
 };
 
-
-
+// READ all
 const getAllServices = (req, res) => {
     const query = 'SELECT * FROM services';
     conn.query(query, (err, result) => {
         if (err) {
-            console.error('Error fetching services:', err);
-            res.status(500).json({ error: 'Error fetching services.' });
-        } else {
-            res.status(200).json(result);
+            console.error('Erreur récupération services:', err);
+            return res.status(500).json({ error: 'Error fetching services.' });
         }
+        res.status(200).json(result);
     });
 };
 
+// READ by ID
+const getServiceById = (req, res) => {
+    const serviceId = req.params.id;
+
+    const query = 'SELECT * FROM services WHERE ID = ?';
+    conn.query(query, [serviceId], (err, result) => {
+        if (err) {
+            console.error('Erreur récupération service:', err);
+            return res.status(500).json({ error: 'Error fetching service data.' });
+        } else if (result.length === 0) {
+            return res.status(404).json({ error: 'Service not found.' });
+        }
+        res.status(200).json(result[0]);
+    });
+};
+
+// UPDATE
 const updateService = (req, res) => {
     const id = req.params.id;
-
     const {
         title_fr, title_en,
         description_fr, description_en,
@@ -85,42 +110,28 @@ const updateService = (req, res) => {
             id
         ],
         (err) => {
-            if (err) return res.status(500).json({ error: 'Error updating service.' });
-            res.status(200).json({ message: "Service updated successfully" });
+            if (err) {
+                console.error('Erreur mise à jour service:', err);
+                return res.status(500).json({ error: 'Error updating service.' });
+            }
+            res.status(200).json({ message: 'Service updated successfully' });
         }
     );
 };
 
-
-const getServiceById = (req, res) => {
-    const serviceId = req.params.id;
-
-    const query = 'SELECT * FROM services WHERE ID = ?';
-    conn.query(query, [serviceId], (err, result) => {
-        if (err) {
-            console.error('Error fetching service data:', err);
-            res.status(500).json({ error: 'Error fetching service data.' });
-        } else if (result.length === 0) {
-            res.status(404).json({ error: 'service not found.' });
-        } else {
-            res.status(200).json(result[0]);
-        }
-    });
-};
-
+// DELETE
 const deleteService = (req, res) => {
     const serviceId = req.params.id;
 
     const query = 'DELETE FROM services WHERE ID = ?';
     conn.query(query, [serviceId], (err, result) => {
         if (err) {
-            console.error('Error deleting service:', err);
-            res.status(500).json({ error: 'Error deleting service.' });
+            console.error('Erreur suppression service:', err);
+            return res.status(500).json({ error: 'Error deleting service.' });
         } else if (result.affectedRows === 0) {
-            res.status(404).json({ error: 'service not found.' });
-        } else {
-            res.status(200).json({ message: 'service deleted successfully' });
+            return res.status(404).json({ error: 'Service not found.' });
         }
+        res.status(200).json({ message: 'Service deleted successfully.' });
     });
 };
 
