@@ -5,13 +5,13 @@ import { useTranslation } from "react-i18next";
 
 interface Service {
     id: number;
-    titleFr: string;
-    titleEn: string;
+    titleFr?: string;
+    titleEn?: string;
     price: number;
-    descriptionFr: string;
-    descriptionEn: string;
-    featuresFr: string[];
-    featuresEn: string[];
+    descriptionFr?: string;
+    descriptionEn?: string;
+    featuresFr?: string[];
+    featuresEn?: string[];
     createdAt: string;
 }
 
@@ -27,8 +27,14 @@ const Services = () => {
             try {
                 const response = await axios.get('http://localhost:8000/services');
 
-                // Le backend renvoie déjà des tableaux → aucune conversion JSON nécessaire
-                setServices(response.data);
+                // On s'assure que chaque service a bien des tableaux pour features
+                const data: Service[] = response.data.map((service: Service) => ({
+                    ...service,
+                    featuresFr: Array.isArray(service.featuresFr) ? service.featuresFr : [],
+                    featuresEn: Array.isArray(service.featuresEn) ? service.featuresEn : [],
+                }));
+
+                setServices(data);
             } catch (err) {
                 console.error(err);
                 setError(t("services.error"));
@@ -50,13 +56,13 @@ const Services = () => {
             <div className={styles['services-container']}>
                 {services.map((service) => {
                     const title =
-                        i18n.language === "fr" ? service.titleFr : service.titleEn;
+                        i18n.language === "fr" ? service.titleFr || t("services.untitled") : service.titleEn || t("services.untitled");
 
                     const description =
-                        i18n.language === "fr" ? service.descriptionFr : service.descriptionEn;
+                        i18n.language === "fr" ? service.descriptionFr || t("services.noDescription") : service.descriptionEn || t("services.noDescription");
 
                     const features =
-                        i18n.language === "fr" ? service.featuresFr : service.featuresEn;
+                        i18n.language === "fr" ? service.featuresFr || [] : service.featuresEn || [];
 
                     return (
                         <div key={service.id} className={styles['service-card']}>
