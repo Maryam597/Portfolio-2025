@@ -115,11 +115,14 @@
 },
 
 
+"services": {
   "title": "Our Services",
   "loading": "Loading services...",
   "error": "Error loading services.",
-  "price": "Price"
-
+  "price": "Price",
+  "noDescription": "No description available",
+  "untitled": "Untitled Service"
+}
 
 
 

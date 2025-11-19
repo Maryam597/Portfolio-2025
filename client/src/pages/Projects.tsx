@@ -49,7 +49,6 @@ useEffect(() => {
                         : proj.technologies
             }));
 
-            console.log("MAPPED PROJECTS :", mapped);
 
             setProjects(mapped);
         } catch (err) {
@@ -121,7 +120,6 @@ useEffect(() => {
                                         </a>
                                     )}
 
-                                    {/* DEMO */}
                                     {proj.url && (
                                         <a
                                             href={proj.url}
