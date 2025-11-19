@@ -5,15 +5,16 @@ import { useTranslation } from "react-i18next";
 
 interface Service {
     id: number;
-    titleFr: string;
-    titleEn: string;
     price: number;
-    descriptionFr: string;
-    descriptionEn: string;
-    featuresFr: string;  // JSON string from DB
-    featuresEn: string;  // JSON string from DB
-    createdAt: string;
+    created_at: string;
+    title_fr: string;
+    title_en: string;
+    description_fr: string;
+    description_en: string;
+    features_fr: string;
+    features_en: string;
 }
+
 
 const Services = () => {
     const { t, i18n } = useTranslation();
@@ -47,24 +48,13 @@ const Services = () => {
 
             <div className={styles['services-container']}>
                 {services.map((service) => {
-                    const title =
-                        i18n.language === "fr"
-                            ? service.titleFr || t("services.untitled")
-                            : service.titleEn || t("services.untitled");
+                    const title = i18n.language === "fr" ? service.title_fr : service.title_en;
+                    const description = i18n.language === "fr" ? service.description_fr : service.description_en;
 
-                    const description =
-                        i18n.language === "fr"
-                            ? service.descriptionFr || t("services.noDescription")
-                            : service.descriptionEn || t("services.noDescription");
+                    const features = i18n.language === "fr"
+                        ? service.features_fr ? JSON.parse(service.features_fr) : []
+                        : service.features_en ? JSON.parse(service.features_en) : [];
 
-                    const features =
-                        i18n.language === "fr"
-                            ? service.featuresFr
-                                ? JSON.parse(service.featuresFr)
-                                : []
-                            : service.featuresEn
-                                ? JSON.parse(service.featuresEn)
-                                : [];
 
                     return (
                         <div key={service.id} className={styles['service-card']}>
