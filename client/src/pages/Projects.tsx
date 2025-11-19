@@ -11,7 +11,7 @@ interface Project {
     summaryFr: string;
     descriptionEn: string;
     descriptionFr: string;
-    images: string[];
+    images: string[];          // MUST be an array in DB
     url: string | null;
     github: string | null;
     category: string;
@@ -23,27 +23,54 @@ const Projects = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        const fetchProjects = async () => {
-            try {
-                const response = await axios.get('http://localhost:8000/projects/all');
-                setProjects(response.data);
-            } catch (err) {
-                setError(t("projects.error"));
-            } finally {
-                setLoading(false);
-            }
-        };
+useEffect(() => {
+    const fetchProjects = async () => {
+        try {
+            const response = await axios.get('http://localhost:8000/projects/all');
 
-        fetchProjects();
-    }, [t]);
+            const mapped = response.data.map((proj: any) => ({
+                id: proj.id,
+                title: proj.title,
+
+                summaryEn: proj.summary_en,
+                summaryFr: proj.summary_fr,
+
+                descriptionEn: proj.description_en,
+                descriptionFr: proj.description_fr,
+
+                images: proj.image ? [proj.image] : [],
+
+                github: proj.link_github,
+                url: proj.link_demo,
+
+                technologies:
+                    typeof proj.technologies === "string"
+                        ? JSON.parse(proj.technologies)
+                        : proj.technologies
+            }));
+
+            console.log("MAPPED PROJECTS :", mapped);
+
+            setProjects(mapped);
+        } catch (err) {
+            console.error(err);
+            setError(t("projects.error"));
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    fetchProjects();
+}, [t]);
+
+
 
     if (loading) return <p>{t("projects.loading")}</p>;
     if (error) return <p>{error}</p>;
 
     return (
         <div className={styles.projectsPage}>
-
+            
             <div className={styles.projectsIntro}>
                 <h1>{t("projects.title")}</h1>
                 <p>{t("projects.subtitle")}</p>
@@ -61,8 +88,9 @@ const Projects = () => {
                     return (
                         <div key={proj.id} className={styles.projectCard}>
 
+                            {/* IMAGE */}
                             <div className={styles.imageContainer}>
-                                {proj.images?.[0] && (
+                                {proj.images?.length > 0 && (
                                     <img
                                         src={`http://localhost:8000${proj.images[0]}`}
                                         alt={proj.title}
@@ -74,11 +102,14 @@ const Projects = () => {
                                 </div>
                             </div>
 
+                            {/* CONTENT */}
                             <div className={styles.projectContent}>
                                 <h2>{proj.title}</h2>
                                 <p className={styles.summary}>{summary}</p>
 
                                 <div className={styles.projectLinks}>
+                                    
+                                    {/* GITHUB */}
                                     {proj.github && (
                                         <a
                                             href={proj.github}
@@ -90,6 +121,7 @@ const Projects = () => {
                                         </a>
                                     )}
 
+                                    {/* DEMO */}
                                     {proj.url && (
                                         <a
                                             href={proj.url}
