@@ -85,7 +85,25 @@
 }, 
 
 
+"contact": {
+  "title": "Contact us",
+  "subtitle": "For any question or project, our team is available to answer you as soon as possible.",
+  
+  "phone": "+33.7.50.47.46.23",
+  "email": "maryam.dri@hotmail.fr",
+  "location": "Villeneuve d’Ascq",
+  "company": "DL Motors",
 
+  "form": {
+    "title": "Contact Form",
+    "name": "Name",
+    "email": "Email Address",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send",
+    "success": "Your message has been successfully sent!"
+  }
+},
 
 "projects": {
   "loading": "Loading projects...",
