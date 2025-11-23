@@ -1,0 +1,133 @@
+{
+    "home": {
+        "title": "Développeuse Web Full-Stack",
+        "intro": "Je suis développeuse spécialisée en <strong>Front-end</strong> et <strong>Back-end</strong>. Je vous accompagne dans la création de sites web et d'applications sur mesure, et je donne vie à vos idées.",
+        "cube": {
+            "frontend": "FrontEnd",
+            "backend": "Backend",
+            "design": "Design",
+            "tools": "Outils"
+        },
+        "cards": {
+            "services": {
+                "title": "💼 Services",
+                "desc": "Découvrez ce que je propose",
+                "cta": "Voir plus"
+            },
+            "projects": {
+                "title": "📂 Projets",
+                "desc": "Un aperçu de mes réalisations",
+                "cta": "Voir plus"
+            },
+            "contact": {
+                "title": "📩 Contact",
+                "desc": "Discutons de votre projet",
+                "cta": "Me contacter"
+            }
+        }
+    },
+    "tech": {
+        "React": "React",
+        "HTML5": "HTML5",
+        "CSS3": "CSS3",
+        "JavaScript": "JavaScript",
+        "Angular": "Angular",
+        "Vue.js": "Vue.js",
+        "TypeScript": "TypeScript",
+        "Next.js": "Next.js",
+        "Tailwind": "Tailwind",
+        "Spring Boot": "Spring Boot",
+        "PHP": "PHP",
+        "Node.js": "Node.js",
+        "Java": "Java",
+        "Express": "Express",
+        "Figma": "Figma",
+        "Bootstrap": "Bootstrap",
+        "Canva": "Canva",
+        "Illustrator": "Illustrator",
+        "Sketch": "Sketch",
+        "MySQL": "MySQL",
+        "MongoDB": "MongoDB",
+        "Postman": "Postman",
+        "Docker": "Docker",
+        "Git": "Git"
+    }, 
+
+
+    "header": {
+  "home": "Accueil",
+  "projects": "Projets",
+  "services": "Services",
+  "contact": "Contact"
+},
+
+"footer": {
+  "usefulLinks": {
+    "title": "Liens Utiles",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "email": "Envoyer un Email"
+  },
+  "pages": {
+    "title": "Pages",
+    "home": "Accueil",
+    "services": "Services",
+    "projects": "Projets",
+    "contact": "Contact"
+  },
+  "informations": {
+    "title": "Informations",
+    "location": "Lille, France",
+    "phone": "07.50.47.46.23",
+    "email": "maryam.dri@hotmail.fr"
+  }
+
+
+
+},
+
+
+  "contact": {
+  "title": "Nous contacter",
+  "subtitle": "Pour toute question ou projet, notre équipe est disponible pour vous répondre rapidement.",
+  
+  "phone": "07.50.47.46.23",
+  "email": "maryam.dri@hotmail.fr",
+  "location": "Villeneuve d’Ascq",
+  "company": "DL Motors",
+
+  "form": {
+    "title": "Formulaire de contact",
+    "name": "Nom",
+    "email": "Adresse Email",
+    "subject": "Sujet",
+    "message": "Message",
+    "send": "Envoyer",
+    "success": "Votre message a été envoyé avec succès !"
+  }
+},
+
+"projects": {
+  "loading": "Chargement des projets...",
+  "error": "Erreur lors de la récupération des projets.",
+  "title": "Mes projets",
+  "subtitle": "Découvrez quelques réalisations web modernes et soignées.",
+  "github": "Voir sur GitHub",
+  "demo": "Voir la démo"
+},
+
+
+"services": {
+  "title": "Nos Services",
+  "loading": "Chargement des services...",
+  "error": "Erreur lors de la récupération des services.",
+  "price": "Prix",
+  "noDescription": "Pas de description disponible",
+  "untitled": "Service sans titre"
+}
+
+
+
+}
+
+
