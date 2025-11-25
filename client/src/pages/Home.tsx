@@ -140,7 +140,7 @@ useEffect(() => {
             <Link to={`/${card}`} className={styles.cardBtn}>
               {t(`home.cards.${card}.cta`)}
             </Link>
-          </div>
+          </div>                  
         ))}
       </section>
     </div>
