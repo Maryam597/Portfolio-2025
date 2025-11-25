@@ -1,4 +1,3 @@
-/* ===== HEADER ===== */
 .header {
   position: fixed;
   top: 0;
@@ -15,7 +14,6 @@
   margin-left: 32px;
 }
 
-/* NAV Desktop */
 nav {
   display: flex;
   align-items: center;
@@ -28,14 +26,13 @@ nav a {
   font-weight: bold;
   transition: color 0.3s ease;
   font-size: 21px;
-  margin-right: 60px; /* desktop only */
+  margin-right: 60px; 
 }
 
 nav a:hover {
   color: rgb(132, 155, 182);
 }
 
-/* UL Desktop */
 .ul {
   list-style: none;
   margin: 0;
@@ -49,9 +46,8 @@ li {
   margin-right: 10px;
 }
 
-/* ===== BURGER (mobile only) ===== */
 .burger {
-  display: none; /* caché par défaut desktop */
+  display: none; 
   flex-direction: column;
   justify-content: space-between;
   width: 28px;
@@ -93,8 +89,8 @@ li {
     background: rgba(50,50,50,0.95);
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* liens à gauche */
-    padding: 60px 0 0 0; /* supprimer padding horizontal */
+    align-items: flex-start; 
+    padding: 60px 0 0 0; 
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
     z-index: 9998;
@@ -104,13 +100,12 @@ li {
     transform: translateX(0);
   }
 
-  /* UL responsive */
   .nav ul {
     display: flex;
     flex-direction: column;
     gap: 25px;
     margin: 50px;
-    padding-left: 20px; /* petit décalage à gauche */
+    padding-left: 20px; 
     width: 100%;
   }
 
@@ -120,12 +115,12 @@ li {
   }
 
   .nav ul li a {
-    display: block;       /* prend toute la largeur */
+    display: block;      
     width: 100%;
     font-size: 1.5rem;
     color: white;
     text-decoration: none;
-    text-align: left;     /* bien à gauche */
+    text-align: left;   
     padding: 0.5rem 0;
   }
 

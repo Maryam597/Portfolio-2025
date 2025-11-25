@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
-import { useState } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   SiReact, SiHtml5, SiCss3, SiJavascript, SiAngular, SiTailwindcss,
   SiSpringboot, SiPhp, SiNodedotjs, SiFigma, SiBootstrap, SiCanva,
@@ -14,9 +14,22 @@ import React from "react";
 type CubeName = "frontend" | "backend" | "design" | "tools";
 
 const Home: React.FC = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [activeCube, setActiveCube] = useState<CubeName | null>(null);
   const [hoverCube, setHoverCube] = useState<CubeName | null>(null);
+
+  const cubeRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+useEffect(() => {
+  const handleClickOutside = (e: MouseEvent) => {
+    if (!cubeRefs.current.some(ref => ref?.contains(e.target as Node))) {
+      setActiveCube(null);
+    }
+  };
+  document.addEventListener("click", handleClickOutside);
+  return () => document.removeEventListener("click", handleClickOutside);
+}, []);
+
 
   const handleCubeClick = (cube: CubeName) => {
     setActiveCube((prev) => (prev === cube ? null : cube));
@@ -59,17 +72,14 @@ const Home: React.FC = () => {
   ];
 
   const renderTechBubbles = (cube: CubeName, techList: any[]) => {
-    const wrapperClass =
-      activeCube === cube
-        ? styles.techBubblesBottom
-        : hoverCube === cube && !activeCube
-          ? styles.techBubblesTop
-          : "";
+    const isDesktop = window.innerWidth > 768;
+    const show =
+      (isDesktop && hoverCube === cube) || (!isDesktop && activeCube === cube);
 
-    if (!wrapperClass) return null;
+    if (!show) return null;
 
     return (
-      <div className={wrapperClass}>
+      <div className={isDesktop ? styles.techBubblesTop : styles.techBubblesRight}>
         {techList.map((tech, index) => (
           <div key={index} className={styles.techBubble} title={tech.name}>
             {React.cloneElement(tech.icon, { color: tech.color, size: "2rem" })}
@@ -79,27 +89,17 @@ const Home: React.FC = () => {
     );
   };
 
-  console.log("intro =", t("home.intro"));
-  console.log("lang =", i18n.language);
-
   return (
     <div className={styles.home}>
       <section className={styles.banner}>
         <div className={styles.presentation}>
           <h1>{t("home.title")}</h1>
-
-<p dangerouslySetInnerHTML={{ __html: t("home.intro") }} />
-
-
-
-
-
-
+          <p dangerouslySetInnerHTML={{ __html: t("home.intro") }} />
         </div>
       </section>
 
       <div className={styles.cubeContainer}>
-        {["frontend", "backend", "design", "tools"].map((cube) => {
+        {["frontend", "backend", "design", "tools"].map((cube, index) => {
           const cubeClass = styles[cube as CubeName];
           const cubeTech = {
             frontend: frontendTech,
@@ -117,6 +117,7 @@ const Home: React.FC = () => {
                   setHoverCube((prev) => (prev === cube ? null : prev))
                 }
                 onClick={() => handleCubeClick(cube as CubeName)}
+                ref={(el) => { cubeRefs.current[index] = el; }}
               >
                 <div className={styles.cube_side}>{t(`home.cube.${cube}`)}</div>
                 <div className={styles.cube_side}></div>
