@@ -61,7 +61,15 @@ li {
     align-items: center;
     text-align: left;
     gap: 1.5rem;
+    
   }
+
+    .footer {
+    background: transparent; 
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
 
   .footer ul {
     width: 100%;
