@@ -3,7 +3,6 @@
   padding: 2rem;
 }
 
-/* ===== BANNER ===== */
 .banner {
   display: flex;
   justify-content: space-between;
@@ -33,6 +32,7 @@
   font-size: 1.2rem;
   line-height: 1.6;
   color: white;
+  padding: 20px 200px 20px;
   text-shadow: rgb(0, 0, 0) 1px 0px 0px,
     rgb(0, 0, 0) 0.54px 0.84px 0px,
     rgb(0, 0, 0) -0.41px 0.9px 0px,
@@ -42,7 +42,6 @@
     rgb(0, 0, 0) 0.96px -0.27px 0px;
 }
 
-/* ===== STACKS ===== */
 .stacks {
   text-align: center;
   margin: 2rem 0;
@@ -431,4 +430,127 @@
   /* color: red; */
   width: 2rem;
   height: 2rem;
+}
+
+
+@media (max-width: 1024px) {
+
+  .banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .presentation p {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .cards {
+    margin-top: 100px;
+    gap: 1.5rem;
+  }
+
+  .cubeContainer {
+    margin: 50px auto;
+    justify-content: center;
+    gap: 2rem;
+  }
+}
+
+
+
+
+@media (max-width: 768px) {
+
+  .home {
+    padding: 1rem;
+  }
+
+  .presentation h1 {
+    font-size: 1.8rem;
+  }
+
+  .presentation p {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 1rem;
+  }
+
+  .stacks {
+    font-size: 1.2rem;
+  }
+
+  .stackList {
+    gap: 0.7rem;
+  }
+
+  .cards {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    padding: 1rem;
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  .cubeContainer {
+    flex-direction: column;
+    gap: 3rem;
+    margin: 40px auto;
+  }
+
+  .cube {
+    --width: 70px;
+    --height: 70px;
+    --depth: 70px;
+    transform: rotateX(24deg) rotateY(-45deg) scale(0.9);
+  }
+
+  .techBubblesTop,
+  .techBubblesBottom {
+    gap: 10px;
+  }
+
+  .techBubble {
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
+  }
+
+  .techBubble img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+
+
+@media (max-width: 480px) {
+
+  .presentation h1 {
+    font-size: 1.5rem;
+  }
+
+  .presentation p {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .card {
+    padding: 1.5rem 1rem;
+  }
+
+  .cube {
+    transform: rotateX(24deg) rotateY(-45deg) scale(0.8);
+    --width: 60px;
+    --height: 60px;
+    --depth: 60px;
+  }
+
+  .cubeContainer {
+    gap: 2rem;
+  }
 }

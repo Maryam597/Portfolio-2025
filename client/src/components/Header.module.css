@@ -49,3 +49,49 @@ li {
   display: inline-block;
   margin-right: 10px;
 }
+
+
+
+@media (max-width: 900px) {
+  .header {
+    padding: 0 15px;
+    margin-top: 10px;
+    margin-left: 0;
+  }
+
+  nav a {
+    margin-right: 25px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 650px) {
+  .header {
+    height: 70px;
+    padding: 0 10px;
+  }
+
+  .ul {
+    display: flex;
+    gap: 1rem;
+  }
+
+  nav a {
+    margin-right: 0;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ul {
+    gap: 0.6rem;
+  }
+
+  nav a {
+    font-size: 14px;
+  }
+
+  .header {
+    height: 60px;
+  }
+}
