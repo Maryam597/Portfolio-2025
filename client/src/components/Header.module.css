@@ -1,3 +1,4 @@
+/* ===== HEADER ===== */
 .header {
   position: fixed;
   top: 0;
@@ -7,22 +8,18 @@
   z-index: 1000;
 
   display: flex;
-  align-items: center; 
-  justify-content: space-between; 
-  padding: 0 35px; 
-margin-top: 30px;
-margin-left: 32px;
-
-/* 
-background: #000000;
-background: linear-gradient(90deg, rgba(41, 41, 41, 0.9) 0%, rgba(75, 74, 74, 0.91) 37%, rgba(87, 87, 87, 0) 37%); */
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 35px;
+  margin-top: 30px;
+  margin-left: 32px;
 }
 
+/* NAV Desktop */
 nav {
   display: flex;
-  align-items: center; 
+  align-items: center;
   gap: 1.5rem;
-
 }
 
 nav a {
@@ -31,18 +28,20 @@ nav a {
   font-weight: bold;
   transition: color 0.3s ease;
   font-size: 21px;
-    margin-right: 60px;
-
+  margin-right: 60px; /* desktop only */
 }
 
 nav a:hover {
   color: rgb(132, 155, 182);
 }
 
-ul {
+/* UL Desktop */
+.ul {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  gap: 1rem;
 }
 
 li {
@@ -50,20 +49,19 @@ li {
   margin-right: 10px;
 }
 
-
-
+/* ===== BURGER (mobile only) ===== */
 .burger {
-  display: flex !important;
+  display: none; /* caché par défaut desktop */
   flex-direction: column;
   justify-content: space-between;
   width: 28px;
   height: 22px;
-  background: none; 
+  background: none;
   border: none;
-  position: fixed !important;
-  top: 20px !important;
-  left: 20px !important; 
-  z-index: 9999 !important;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 9999;
   cursor: pointer;
   padding: 0;
 }
@@ -76,20 +74,27 @@ li {
   border-radius: 3px;
 }
 
-
+.close {
+  display: none;
+}
 
 @media (max-width: 750px) {
+
+  .burger {
+    display: flex;
+  }
+
   .nav {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(50,50,50,0.95); 
+    background: rgba(50,50,50,0.95);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start; /* liens à gauche */
+    padding: 60px 0 0 0; /* supprimer padding horizontal */
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
     z-index: 9998;
@@ -99,19 +104,37 @@ li {
     transform: translateX(0);
   }
 
-  .ul {
+  /* UL responsive */
+  .nav ul {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    /* align-items: flex-end; */
+    gap: 25px;
+    margin: 50px;
+    padding-left: 20px; /* petit décalage à gauche */
+    width: 100%;
   }
 
-  .ul a {
-    font-size: 24px;
+  .nav ul li {
+    width: 100%;
+    margin: 0;
+  }
+
+  .nav ul li a {
+    display: block;       /* prend toute la largeur */
+    width: 100%;
+    font-size: 1.5rem;
     color: white;
+    text-decoration: none;
+    text-align: left;     /* bien à gauche */
+    padding: 0.5rem 0;
+  }
+
+  .nav ul li a:hover {
+    color: #f39c12;
   }
 
   .close {
+    display: block;
     position: absolute;
     top: 20px;
     right: 25px;
